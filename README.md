@@ -105,11 +105,6 @@ tachyon-webstore/
 - `pnpm run check`: Run Biome formatting and linting
 
 
- more.
-
- more.
-
-
 
 
 
