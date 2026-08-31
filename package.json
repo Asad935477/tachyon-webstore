@@ -1,0 +1,34 @@
+{
+  "name": "tachyon-webstore",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev:web": "turbo run dev -F web --",
+    "dev:server": "turbo run dev -F server --",
+    "db:push": "turbo run db:push -F @tachyon-webstore/db --",
+    "db:studio": "turbo run db:studio -F @tachyon-webstore/db --",
+    "db:generate": "turbo run db:generate -F @tachyon-webstore/db --",
+    "db:migrate": "turbo run db:migrate -F @tachyon-webstore/db --",
+    "check": "biome check --write ."
+  },
+  "dependencies": {
+    "@tachyon-webstore/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.11",
+    "@tachyon-webstore/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "turbo": "^2.10.12",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@11.8.0"
+}

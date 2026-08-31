@@ -1,0 +1,3 @@
+{
+  "extends": "@tachyon-webstore/config/tsconfig.base.json"
+}
