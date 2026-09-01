@@ -3,10 +3,13 @@ import { z } from "zod";
 
 import {
 	getMockCategories,
+	getMockCollection,
+	getMockCollections,
 	getMockFeaturedProducts,
 	getMockProduct,
 	getMockProductBySlug,
 	getMockProducts,
+	getMockTestimonials,
 } from "../mock/catalog";
 import { publicProcedure, router } from "../index";
 
@@ -180,5 +183,19 @@ export const catalogRouter = router({
 			}
 
 			return getMockProduct(input.id);
+		}),
+
+	getTestimonials: publicProcedure.query(() => {
+		return getMockTestimonials();
+	}),
+
+	getCollections: publicProcedure.query(() => {
+		return getMockCollections();
+	}),
+
+	getCollection: publicProcedure
+		.input(z.object({ slug: z.string().min(1) }))
+		.query(({ input }) => {
+			return getMockCollection(input.slug);
 		}),
 });
