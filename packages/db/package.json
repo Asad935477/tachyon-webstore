@@ -16,7 +16,7 @@
 		"db:migrate:deploy": "prisma migrate deploy",
 		"postinstall": "prisma generate",
 		"db:studio": "prisma studio",
-		"db:seed": "bun run prisma/seed.ts"
+		"db:seed": "tsx prisma/seed.ts"
 	},
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.9.1",
@@ -30,6 +30,7 @@
 		"@tachyon-webstore/config": "workspace:*",
 		"@types/pg": "^8.20.0",
 		"prisma": "^7.9.1",
+		"tsx": "^4.23.13",
 		"typescript": "catalog:"
 	}
 }
