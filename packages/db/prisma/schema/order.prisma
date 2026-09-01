@@ -1,43 +1,49 @@
+// ═════════════════════════════════════════════════════════════════════════════
+// ERD: ORDER
+// Core fields (strict ERD): id (cuid), userId (string), status (string:
+// 'pending' | 'paid' | 'failed'), totalAmount (float).
+// Relation: 1-to-many with ORDER_ITEM (USER 1-to-many ORDER).
+// Auxiliary fields (stripeSessionId, email, address, timestamps) are NOT part
+// of the core ERD — they are required to correlate orders with Stripe
+// Checkout Sessions and the webhook handler.
+// ═════════════════════════════════════════════════════════════════════════════
 model Order {
-  id              String      @id @default(cuid())
-  userId          String?
-  email           String
-  stripeSessionId String      @unique
-  status          OrderStatus @default(pending)
-  subtotal        Int
-  shipping        Int         @default(0)
-  tax             Int         @default(0)
-  total           Int
-  currency        String      @default("usd")
+  id     String @id @default(cuid())
+
+  // Core ERD
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status      String  @default("pending") // 'pending' | 'paid' | 'failed'
+  totalAmount Float
+
+  // ── Auxiliary checkout fields (not part of core ERD) ──
+  stripeSessionId String  @unique
+  email           String  @default("")
   shippingAddress Json?
   items           OrderItem[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([userId])
   @@map("order")
 }
 
-enum OrderStatus {
-  pending
-  paid
-  fulfilled
-  cancelled
-  refunded
-}
-
+// ═════════════════════════════════════════════════════════════════════════════
+// ERD: ORDER_ITEM
+// Core fields (strict ERD): id (cuid), orderId (string), productId (string),
+// quantity (int).
+// Relation: ORDER 1-to-many ORDER_ITEM; PRODUCT 1-to-many ORDER_ITEM.
+// ═════════════════════════════════════════════════════════════════════════════
 model OrderItem {
-  id        String  @id @default(cuid())
+  id        String @id @default(cuid())
   orderId   String
-  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId String
-  variantId String?
-  name      String
-  sku       String?
-  price     Int
   quantity  Int
-  image     String?
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
+  @@index([productId])
   @@map("order_item")
 }

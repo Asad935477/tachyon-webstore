@@ -1,39 +1,59 @@
+// ═════════════════════════════════════════════════════════════════════════════
+// ERD: CATEGORY
+// Core fields (strict ERD): id (cuid), name (string).
+// Relation: 1-to-many with PRODUCT.
+// Auxiliary storefront fields (slug, description, image, position) are NOT part
+// of the core ERD — they exist purely to power routing and imagery.
+// ═════════════════════════════════════════════════════════════════════════════
 model Category {
-  id          String    @id @default(cuid())
-  slug        String    @unique
-  name        String
+  id   String @id @default(cuid())
+  name String
+
+  // ── Auxiliary storefront fields (not part of core ERD) ──
+  slug        String  @unique
   description String?
   image       String?
-  position    Int       @default(0)
-  products    Product[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  position    Int     @default(0)
+
+  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("category")
 }
 
+// ═════════════════════════════════════════════════════════════════════════════
+// ERD: PRODUCT
+// Core fields (strict ERD): id (cuid), title (string), price (float),
+// stock (int), categoryId (string).
+// Relation: 1-to-many with ORDER_ITEM.
+// Auxiliary storefront fields are NOT part of the core ERD.
+// ═════════════════════════════════════════════════════════════════════════════
 model Product {
-  id             String          @id @default(cuid())
-  slug           String          @unique
-  name           String
-  tagline        String          @default("")
-  description    String
-  price          Int
-  compareAtPrice Int?
-  currency       String          @default("usd")
-  status         ProductStatus   @default(active)
-  featured       Boolean         @default(false)
-  isNew          Boolean         @default(false)
-  bestseller     Boolean         @default(false)
-  rating         Float           @default(0)
-  reviewCount    Int             @default(0)
-  highlights     String[]        @default([])
-  categoryId     String
-  category       Category        @relation(fields: [categoryId], references: [id])
-  images         ProductImage[]
-  variants       ProductVariant[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id         String   @id @default(cuid())
+  title      String
+  price      Float
+  stock      Int      @default(0)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  // ── Auxiliary storefront fields (not part of core ERD) ──
+  slug           String        @unique
+  description    String        @default("")
+  compareAtPrice Float?
+  currency       String        @default("usd")
+  status         ProductStatus @default(active)
+  featured       Boolean       @default(false)
+  isNew          Boolean       @default(false)
+  bestseller     Boolean       @default(false)
+  rating         Float         @default(0)
+  reviewCount    Int           @default(0)
+  highlights     String[]      @default([])
+
+  images     ProductImage[]
+  orderItems OrderItem[]
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 
   @@index([categoryId])
   @@index([status])
@@ -46,6 +66,7 @@ enum ProductStatus {
   archived
 }
 
+// ── Auxiliary content model (not part of core ERD) ──
 model ProductImage {
   id        String  @id @default(cuid())
   productId String
@@ -56,20 +77,4 @@ model ProductImage {
 
   @@index([productId])
   @@map("product_image")
-}
-
-model ProductVariant {
-  id         String  @id @default(cuid())
-  productId  String
-  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  name       String
-  sku        String  @unique
-  price      Int?
-  stock      Int     @default(0)
-  attributes Json?
-  isDefault  Boolean @default(false)
-  position   Int     @default(0)
-
-  @@index([productId])
-  @@map("product_variant")
 }

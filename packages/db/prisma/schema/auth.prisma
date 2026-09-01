@@ -1,13 +1,26 @@
+// ═════════════════════════════════════════════════════════════════════════════
+// ERD: USER
+// Core fields (strict ERD): id (cuid), name (string), email (string),
+// role (string, default 'customer').
+// Relation: 1-to-many with ORDER.
+// Auxiliary auth fields (emailVerified, image, sessions, accounts) are required
+// by Better-Auth and are NOT part of the core ERD.
+// ═════════════════════════════════════════════════════════════════════════════
 model User {
-  id            String    @id
-  name          String
-  email         String
+  id    String @id @default(cuid())
+  name  String
+  email String
+  role  String @default("customer") // 'customer' | 'admin'
+
+  // ── Auxiliary auth fields (Better-Auth) ──
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+
+  sessions Session[]
+  accounts Account[]
+  orders   Order[]
 
   @@unique([email])
   @@map("user")
