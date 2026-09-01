@@ -1,7 +1,11 @@
+"use client";
+
 import { Button } from "@tachyon-webstore/ui/components/button";
 import { Input } from "@tachyon-webstore/ui/components/input";
 import { Label } from "@tachyon-webstore/ui/components/label";
+import { Separator } from "@tachyon-webstore/ui/components/separator";
 import { useForm } from "@tanstack/react-form";
+import { ArrowRight, Mail, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod";
@@ -20,9 +24,9 @@ export default function SignUpForm({
 
 	const form = useForm({
 		defaultValues: {
+			name: "",
 			email: "",
 			password: "",
-			name: "",
 		},
 		onSubmit: async ({ value }) => {
 			await authClient.signUp.email(
@@ -34,7 +38,7 @@ export default function SignUpForm({
 				{
 					onSuccess: () => {
 						router.push("/dashboard");
-						toast.success("Sign up successful");
+						toast.success("Account created");
 					},
 					onError: (error) => {
 						toast.error(error.error.message || error.error.statusText);
@@ -56,8 +60,13 @@ export default function SignUpForm({
 	}
 
 	return (
-		<div className="mx-auto mt-10 w-full max-w-md p-6">
-			<h1 className="mb-6 text-center font-bold text-3xl">Create Account</h1>
+		<div className="space-y-8">
+			<div className="space-y-2">
+				<h1 className="text-3xl font-semibold tracking-tight">Create account</h1>
+				<p className="text-sm text-muted-foreground">
+					Start building a better setup with Tachyon.
+				</p>
+			</div>
 
 			<form
 				onSubmit={(e) => {
@@ -65,75 +74,81 @@ export default function SignUpForm({
 					e.stopPropagation();
 					form.handleSubmit();
 				}}
-				className="space-y-4"
+				className="space-y-5"
 			>
-				<div>
-					<form.Field name="name">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Name</Label>
+				<form.Field name="name">
+					{(field) => (
+						<div className="space-y-2">
+							<Label htmlFor={field.name}>Name</Label>
+							<div className="relative">
+								<User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
 								<Input
 									id={field.name}
 									name={field.name}
+									placeholder="Your name"
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
+									className="h-11 pl-10"
 								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
 							</div>
-						)}
-					</form.Field>
-				</div>
+							{field.state.meta.errors.map((error) => (
+								<p key={error?.message} className="text-xs text-destructive">
+									{error?.message}
+								</p>
+							))}
+						</div>
+					)}
+				</form.Field>
 
-				<div>
-					<form.Field name="email">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Email</Label>
+				<form.Field name="email">
+					{(field) => (
+						<div className="space-y-2">
+							<Label htmlFor={field.name}>Email</Label>
+							<div className="relative">
+								<Mail className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
 								<Input
 									id={field.name}
 									name={field.name}
 									type="email"
+									placeholder="you@example.com"
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
+									className="h-11 pl-10"
 								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
 							</div>
-						)}
-					</form.Field>
-				</div>
+							{field.state.meta.errors.map((error) => (
+								<p key={error?.message} className="text-xs text-destructive">
+									{error?.message}
+								</p>
+							))}
+						</div>
+					)}
+				</form.Field>
 
-				<div>
-					<form.Field name="password">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
-								<Input
-									id={field.name}
-									name={field.name}
-									type="password"
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
-								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
-							</div>
-						)}
-					</form.Field>
-				</div>
+				<form.Field name="password">
+					{(field) => (
+						<div className="space-y-2">
+							<Label htmlFor={field.name}>Password</Label>
+							<Input
+								id={field.name}
+								name={field.name}
+								type="password"
+								placeholder="At least 8 characters"
+								value={field.state.value}
+								onBlur={field.handleBlur}
+								onChange={(e) => field.handleChange(e.target.value)}
+								className="h-11"
+							/>
+							{field.state.meta.errors.map((error) => (
+								<p key={error?.message} className="text-xs text-destructive">
+									{error?.message}
+								</p>
+							))}
+						</div>
+					)}
+				</form.Field>
 
 				<form.Subscribe
 					selector={(state) => ({
@@ -144,24 +159,31 @@ export default function SignUpForm({
 					{({ canSubmit, isSubmitting }) => (
 						<Button
 							type="submit"
-							className="w-full"
+							size="lg"
+							className="group h-11 w-full"
 							disabled={!canSubmit || isSubmitting}
 						>
-							{isSubmitting ? "Submitting..." : "Sign Up"}
+							{isSubmitting ? "Creating account..." : "Create account"}
+							<ArrowRight className="transition-transform group-hover:translate-x-0.5" />
 						</Button>
 					)}
 				</form.Subscribe>
 			</form>
 
-			<div className="mt-4 text-center">
-				<Button
-					variant="link"
-					onClick={onSwitchToSignIn}
-					className="text-indigo-600 hover:text-indigo-800"
-				>
-					Already have an account? Sign In
-				</Button>
+			<div className="flex items-center gap-3">
+				<Separator className="flex-1" />
+				<span className="text-xs text-muted-foreground">Already have an account?</span>
+				<Separator className="flex-1" />
 			</div>
+
+			<Button
+				variant="outline"
+				size="lg"
+				className="h-11 w-full"
+				onClick={onSwitchToSignIn}
+			>
+				Sign in
+			</Button>
 		</div>
 	);
 }

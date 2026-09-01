@@ -1,4 +1,4 @@
-import { Button } from "@tachyon-webstore/ui/components/button";
+import { Button, buttonVariants } from "@tachyon-webstore/ui/components/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,6 +9,7 @@ import {
 	DropdownMenuTrigger,
 } from "@tachyon-webstore/ui/components/dropdown-menu";
 import { Skeleton } from "@tachyon-webstore/ui/components/skeleton";
+import { cn } from "@tachyon-webstore/ui/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -19,20 +20,23 @@ export default function UserMenu() {
 	const { data: session, isPending } = authClient.useSession();
 
 	if (isPending) {
-		return <Skeleton className="h-9 w-24" />;
+		return <Skeleton className="h-8 w-20" />;
 	}
 
 	if (!session) {
 		return (
-			<Link href="/login">
-				<Button variant="outline">Sign In</Button>
+			<Link
+				href="/login"
+				className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+			>
+				Sign In
 			</Link>
 		);
 	}
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger render={<Button variant="outline" />}>
+			<DropdownMenuTrigger render={<Button variant="outline" size="sm" />}>
 				{session.user.name}
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="bg-card">
