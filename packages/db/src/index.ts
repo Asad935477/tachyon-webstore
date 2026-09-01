@@ -6,7 +6,11 @@ import { PrismaClient } from "../prisma/generated/client";
 export function createPrismaClient() {
 	const adapter = new PrismaPg({
 		connectionString: env.DATABASE_URL,
+		ssl: {
+			rejectUnauthorized: false,
+		},
 	});
+
 	return new PrismaClient({ adapter });
 }
 
