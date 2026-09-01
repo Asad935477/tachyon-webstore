@@ -5,11 +5,12 @@
 	"scripts": {
 		"build": "tsdown",
 		"check-types": "tsc -b",
-		"compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
-		"dev": "bun run --hot src/index.ts",
-		"start": "bun run dist/index.mjs"
+		"compile": "tsdown",
+		"dev": "tsx watch src/index.ts",
+		"start": "node dist/index.mjs"
 	},
 	"dependencies": {
+		"@hono/node-server": "^2.1.1",
 		"@hono/trpc-server": "^0.4.2",
 		"@tachyon-webstore/api": "workspace:*",
 		"@tachyon-webstore/auth": "workspace:*",
@@ -26,6 +27,7 @@
 		"@tachyon-webstore/config": "workspace:*",
 		"@types/bun": "catalog:",
 		"tsdown": "^0.22.14",
+		"tsx": "^4.23.13",
 		"typescript": "catalog:"
 	},
 	"trustedDependencies": [
