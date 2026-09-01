@@ -2,6 +2,7 @@
 
 import { Badge } from "@tachyon-webstore/ui/components/badge";
 import { Button } from "@tachyon-webstore/ui/components/button";
+import { Input } from "@tachyon-webstore/ui/components/input";
 import { X } from "lucide-react";
 
 import type { CategorySummary } from "@/lib/catalog";
@@ -71,7 +72,7 @@ export function Filters({
 					Price range (USD)
 				</div>
 				<div className="flex items-center gap-2">
-					<input
+					<Input
 						type="number"
 						min={0}
 						placeholder="Min"
@@ -83,10 +84,10 @@ export function Filters({
 									: undefined,
 							)
 						}
-						className="h-8 w-full rounded-none border border-input bg-transparent px-2 text-xs"
+						className="h-9"
 					/>
 					<span className="text-muted-foreground">–</span>
-					<input
+					<Input
 						type="number"
 						min={0}
 						placeholder="Max"
@@ -98,7 +99,7 @@ export function Filters({
 									: undefined,
 							)
 						}
-						className="h-8 w-full rounded-none border border-input bg-transparent px-2 text-xs"
+						className="h-9"
 					/>
 				</div>
 			</div>

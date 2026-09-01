@@ -21,7 +21,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 				className="relative hidden overflow-hidden lg:block"
 			>
 				<Image
-					src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1600&h=2000&q=80"
+					src="/images/photo-1498049794561-7780e7231661.jpg"
 					alt="Workspace with premium tech"
 					fill
 					priority

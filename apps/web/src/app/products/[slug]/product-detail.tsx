@@ -89,10 +89,10 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 					<Separator />
 
 					<div className="flex items-center gap-4">
-						<div className="flex items-center rounded-none border border-input">
+						<div className="flex items-center rounded-lg border border-input">
 							<button
 								type="button"
-								className="flex h-9 w-9 items-center justify-center"
+								className="flex h-10 w-10 items-center justify-center rounded-l-lg hover:bg-muted"
 								onClick={() => setQuantity((q) => Math.max(1, q - 1))}
 							>
 								<Minus className="size-4" />
@@ -100,7 +100,7 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 							<span className="w-10 text-center text-sm">{quantity}</span>
 							<button
 								type="button"
-								className="flex h-9 w-9 items-center justify-center"
+								className="flex h-10 w-10 items-center justify-center rounded-r-lg hover:bg-muted"
 								onClick={() => setQuantity((q) => q + 1)}
 							>
 								<Plus className="size-4" />
@@ -108,7 +108,7 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 						</div>
 						<Button
 							size="lg"
-							className="flex-1"
+							className="h-10 flex-1"
 							disabled={outOfStock}
 							onClick={handleAdd}
 						>

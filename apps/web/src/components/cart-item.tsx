@@ -53,10 +53,10 @@ export function CartItemRow({ item }: { item: CartItem }) {
 					</Button>
 				</div>
 				<div className="mt-auto flex items-center justify-between">
-					<div className="flex items-center rounded-none border border-input">
+					<div className="flex items-center rounded-lg border border-input">
 						<button
 							type="button"
-							className="flex h-7 w-7 items-center justify-center"
+							className="flex h-8 w-8 items-center justify-center rounded-l-lg hover:bg-muted"
 							onClick={() => setQuantity(key, item.quantity - 1)}
 						>
 							<Minus className="size-3.5" />
@@ -64,7 +64,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
 						<span className="w-8 text-center text-sm">{item.quantity}</span>
 						<button
 							type="button"
-							className="flex h-7 w-7 items-center justify-center"
+							className="flex h-8 w-8 items-center justify-center rounded-r-lg hover:bg-muted"
 							onClick={() => setQuantity(key, item.quantity + 1)}
 						>
 							<Plus className="size-3.5" />
