@@ -41,14 +41,20 @@ export type ProductSummary = {
 	id: string;
 	slug: string;
 	name: string;
+	tagline: string;
 	description: string;
 	price: number;
 	compareAtPrice: number | null;
 	currency: string;
 	featured: boolean;
+	isNew: boolean;
+	bestseller: boolean;
+	rating: number;
+	reviewCount: number;
 	category: { id: string; slug: string; name: string };
 	images: ProductImageSummary[];
 	variants: ProductVariantSummary[];
+	highlights: string[];
 };
 
 export type ProductPage = {
@@ -57,4 +63,21 @@ export type ProductPage = {
 	page: number;
 	pageSize: number;
 	pageCount: number;
+};
+
+export type Testimonial = {
+	id: string;
+	name: string;
+	role: string;
+	quote: string;
+	rating: number;
+};
+
+export type Collection = {
+	id: string;
+	slug: string;
+	title: string;
+	description: string;
+	image: string;
+	productIds: string[];
 };
