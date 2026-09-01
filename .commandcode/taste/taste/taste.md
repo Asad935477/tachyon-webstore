@@ -4,5 +4,18 @@
 - Prefers minimal, restrained, premium visual design over busy/flashy effects (rejected a shader-heavy intro in favor of clean type, spacing, and subtle ambient color). Confidence: 0.7
 - Prefers zod-validated mock/dummy data as a fallback so the UI renders even when real data/credentials are unavailable. Confidence: 0.7
 - Values resilience/graceful degradation — backend procedures should fall back (e.g. to mock data) rather than hard-fail when a dependency is unavailable. Confidence: 0.7
-- Communicates in terse, direct feedback and expects autonomous iteration on visuals rather than clarifying questions (e.g. "the intro doesnt look good make it look good"). Confidence: 0.5
+- Communicates in terse, direct feedback and expects autonomous iteration on visuals rather than clarifying questions (e.g. "the intro doesnt look good make it look good", "the marqui effect on landing page is not properly working"). Confidence: 0.7
 - Prefers theme-aware UI that respects the system light/dark mode (wired via CSS variables rather than hardcoded colors). Confidence: 0.8
+- Uses the `motion` (Framer Motion) library for scroll reveals, hover states, and micro-interactions. Confidence: 0.7
+- Prefers scroll-reveal and hover micro-interactions layered on top of a minimal, premium aesthetic. Confidence: 0.7
+- Wants ambient/background animations to be clearly perceptible (visible motion), not so slow/subtle they read as static — "subtle but visible" rather than imperceptible. Confidence: 0.6
+- Prefers bento-grid layouts for editorial/feature sections. Confidence: 0.6
+- Prefers high-quality stock imagery (e.g. Unsplash) for mock data and product visuals. Confidence: 0.6
+- Prefers rich, realistic mock product data (taglines, ratings, review counts, highlights/specs). Confidence: 0.6
+- Prefers modular, clean code structure and consistency across both UI and code (explicitly requested). Confidence: 0.7
+- Wants the agent to self-inspect/verify the rendered UI quality itself (e.g. open it in a browser) rather than relying only on type checks and builds. Confidence: 0.6
+- Prefers distinctive, non-generic design over templated/"generic" looks. Confidence: 0.6
+- Prefers iterative polish/refinement — expects the agent to keep revising and improving rather than stopping after one pass. Confidence: 0.6
+- Prefers pure CSS animations over JS animation libraries for simple, infinite/looping animations (e.g. marquee) when reliability matters — switched the marquee off `motion` when it proved flaky. Confidence: 0.7
+- Expects marquee/ticker loops to be seamless and gap-free — each loop half must be wide enough to fill the viewport (repeat content rather than leave empty space). Confidence: 0.6
+- Treats broken/not-loading images as a bug worth fixing; expects external stock image URLs (e.g. Unsplash) to be verified working rather than assumed valid. Confidence: 0.6
