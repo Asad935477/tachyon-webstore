@@ -1,24 +1,22 @@
 "use client";
 
+import { Button } from "@tachyon-webstore/ui/components/button";
 import { Skeleton } from "@tachyon-webstore/ui/components/skeleton";
 import { useQuery } from "@tanstack/react-query";
-import { PackageSearch } from "lucide-react";
+import { ChevronLeft, ChevronRight, PackageSearch } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { EmptyState } from "@/components/empty-state";
 import { Filters } from "@/components/filters";
+import { Reveal } from "@/components/motion/reveal";
 import { ProductGrid } from "@/components/product-grid";
 import { SearchBar } from "@/components/search-bar";
 import { SortSelect } from "@/components/sort-select";
 import type { ProductSort } from "@/lib/catalog";
 import { trpc } from "@/utils/trpc";
 
-export function ProductsView({
-	initialCategory,
-}: {
-	initialCategory?: string;
-}) {
+export function ProductsView({ initialCategory }: { initialCategory?: string }) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -57,9 +55,20 @@ export function ProductsView({
 	}
 
 	return (
-		<div className="mx-auto max-w-7xl px-4 py-10">
-			<div className="mb-8 space-y-4">
-				<h1 className="font-semibold text-3xl tracking-tight">Shop all</h1>
+		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+			<Reveal className="mb-10 space-y-5">
+				<div>
+					<h1 className="text-4xl font-semibold tracking-tight">
+						{category
+							? categories.data?.find((c) => c.slug === category)?.name ?? "Shop"
+							: "Shop all"}
+					</h1>
+					<p className="mt-2 text-muted-foreground">
+						{products.data
+							? `${products.data.total} products`
+							: "Curated technology, refined."}
+					</p>
+				</div>
 				<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 					<div className="w-full md:max-w-md">
 						<SearchBar
@@ -81,10 +90,10 @@ export function ProductsView({
 						}}
 					/>
 				</div>
-			</div>
+			</Reveal>
 
 			<div className="grid gap-8 lg:grid-cols-[240px_1fr]">
-				<aside>
+				<aside className="lg:sticky lg:top-24 lg:self-start">
 					{categories.isLoading ? (
 						<Skeleton className="h-48" />
 					) : categories.data ? (
@@ -115,32 +124,32 @@ export function ProductsView({
 					{products.isLoading ? (
 						<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
 							{Array.from({ length: 6 }).map((_, i) => (
-								<Skeleton key={i} className="aspect-[3/4]" />
+								<Skeleton key={i} className="aspect-[4/5]" />
 							))}
 						</div>
 					) : products.data?.items.length ? (
 						<>
 							<ProductGrid products={products.data.items} />
-							<div className="mt-8 flex items-center justify-center gap-4">
-								<button
-									type="button"
+							<div className="mt-10 flex items-center justify-center gap-2">
+								<Button
+									variant="outline"
+									size="icon"
 									disabled={page <= 1}
 									onClick={() => setPage((p) => p - 1)}
-									className="text-sm disabled:opacity-40"
 								>
-									Previous
-								</button>
-								<span className="text-muted-foreground text-sm">
+									<ChevronLeft />
+								</Button>
+								<span className="px-3 text-sm text-muted-foreground">
 									Page {page} of {products.data.pageCount}
 								</span>
-								<button
-									type="button"
+								<Button
+									variant="outline"
+									size="icon"
 									disabled={page >= products.data.pageCount}
 									onClick={() => setPage((p) => p + 1)}
-									className="text-sm disabled:opacity-40"
 								>
-									Next
-								</button>
+									<ChevronRight />
+								</Button>
 							</div>
 						</>
 					) : (

@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "@tachyon-webstore/ui/components/button";
+import { buttonVariants } from "@tachyon-webstore/ui/components/button";
 import { Skeleton } from "@tachyon-webstore/ui/components/skeleton";
+import { cn } from "@tachyon-webstore/ui/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -25,8 +26,8 @@ function SuccessContent() {
 	return (
 		<div className="mx-auto max-w-xl px-4 py-16 text-center">
 			<CheckCircle2 className="mx-auto mb-4 size-12 text-green-500" />
-			<h1 className="font-semibold text-3xl tracking-tight">Order confirmed</h1>
-			<p className="mt-2 text-muted-foreground text-sm">
+			<h1 className="text-3xl font-semibold tracking-tight">Order confirmed</h1>
+			<p className="mt-2 text-sm text-muted-foreground">
 				Thanks for your order. A confirmation email is on its way.
 			</p>
 
@@ -49,8 +50,11 @@ function SuccessContent() {
 				</div>
 			) : null}
 
-			<Link href="/products" className="mt-8 inline-block">
-				<Button>Continue shopping</Button>
+			<Link
+				href="/products"
+				className={cn(buttonVariants(), "mt-8 inline-flex")}
+			>
+				Continue shopping
 			</Link>
 		</div>
 	);

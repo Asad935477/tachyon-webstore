@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@tachyon-webstore/ui/components/button";
+import { Button, buttonVariants } from "@tachyon-webstore/ui/components/button";
+import { cn } from "@tachyon-webstore/ui/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
@@ -16,8 +17,8 @@ export function CartView() {
 		return (
 			<div className="mx-auto max-w-3xl px-4 py-16">
 				<EmptyState icon={ShoppingCart} title="Your cart is empty">
-					<Link href="/products">
-						<Button>Continue shopping</Button>
+					<Link href="/products" className={cn(buttonVariants())}>
+						Continue shopping
 					</Link>
 				</EmptyState>
 			</div>
@@ -25,9 +26,9 @@ export function CartView() {
 	}
 
 	return (
-		<div className="mx-auto max-w-7xl px-4 py-10">
+		<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 			<div className="mb-8 flex items-center justify-between">
-				<h1 className="font-semibold text-3xl tracking-tight">Your cart</h1>
+				<h1 className="text-3xl font-semibold tracking-tight">Your cart</h1>
 				<Button variant="ghost" onClick={clear}>
 					Clear cart
 				</Button>
@@ -44,10 +45,11 @@ export function CartView() {
 				</div>
 				<div className="space-y-4">
 					<OrderSummary subtotal={subtotal} />
-					<Link href="/checkout" className="block">
-						<Button size="lg" className="w-full">
-							Proceed to checkout
-						</Button>
+					<Link
+						href="/checkout"
+						className={cn(buttonVariants({ size: "lg" }), "w-full")}
+					>
+						Proceed to checkout
 					</Link>
 				</div>
 			</div>
