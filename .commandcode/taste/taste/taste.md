@@ -7,10 +7,13 @@
 - Communicates in terse, direct feedback and expects autonomous iteration on visuals rather than clarifying questions (e.g. "the intro doesnt look good make it look good", "the marqui effect on landing page is not properly working"). Confidence: 0.7
 - Prefers theme-aware UI that respects the system light/dark mode (wired via CSS variables rather than hardcoded colors). Confidence: 0.8
 - Uses the `motion` (Framer Motion) library for scroll reveals, hover states, and micro-interactions. Confidence: 0.7
-- Prefers scroll-reveal and hover micro-interactions layered on top of a minimal, premium aesthetic. Confidence: 0.7
+- Prefers scroll-reveal and hover micro-interactions layered on top of a minimal, premium aesthetic. Confidence: 0.8
 - Wants ambient/background animations to be clearly perceptible (visible motion), not so slow/subtle they read as static — "subtle but visible" rather than imperceptible. Confidence: 0.6
 - Prefers bento-grid layouts for editorial/feature sections. Confidence: 0.6
 - Prefers high-quality stock imagery (e.g. Unsplash) for mock data and product visuals. Confidence: 0.6
+- Values both imagery accuracy and load reliability for product visuals — product images must match the actual product AND always load; generic-but-reliable placeholders (e.g. Picsum) are rejected when they misrepresent the product. Confidence: 0.7
+- Prefers bundling images as local/self-hosted static assets rather than hot-linking external image hosts at runtime, to guarantee they render reliably and match their products. Confidence: 0.6
+- Prefers single-point-of-change / single-source-of-truth patterns — editing one shared helper (e.g. the `img()` function) to migrate all image URLs at once rather than touching dozens of call sites, and keeping seed data and mock data in one shared place rather than duplicating them. Confidence: 0.6
 - Prefers rich, realistic mock product data (taglines, ratings, review counts, highlights/specs). Confidence: 0.6
 - Prefers modular, clean code structure and consistency across both UI and code (explicitly requested). Confidence: 0.7
 - Wants the agent to self-inspect/verify the rendered UI quality itself (e.g. open it in a browser) rather than relying only on type checks and builds. Confidence: 0.6
@@ -19,3 +22,12 @@
 - Prefers pure CSS animations over JS animation libraries for simple, infinite/looping animations (e.g. marquee) when reliability matters — switched the marquee off `motion` when it proved flaky. Confidence: 0.7
 - Expects marquee/ticker loops to be seamless and gap-free — each loop half must be wide enough to fill the viewport (repeat content rather than leave empty space). Confidence: 0.6
 - Treats broken/not-loading images as a bug worth fixing; expects external stock image URLs (e.g. Unsplash) to be verified working rather than assumed valid. Confidence: 0.6
+- Treats mismatched/irrelevant images (e.g. a product photo that doesn't match the listed product) as a bug as severe as broken images, not merely a cosmetic trade-off. Confidence: 0.6
+- Prefers a single-command dev startup with clear port guidance — gets blocked when the workflow requires running from a specific directory or starting multiple processes (e.g. repo-root `pnpm dev` to bring up both web on :3001 and the API on :3000). Confidence: 0.5
+- Prefers minimizing toolchain dependencies and values toolchain consistency — standardizes on a single runtime, specifically Node + pnpm (chose Node over Bun and wanted Bun fully removed, "having both pnpm and bun just ruins consistency"). Confidence: 0.8
+- Prefers buttons, inputs, and other form controls (e.g. quantity steppers) to share a single consistent visual language — matching border-radius, height, and text size — and notices when they "don't match up". Confidence: 0.7
+- Prefers product cards with a full-bleed image background and text overlaid at the bottom (category, name, star rating, price) sitting on a bottom-to-top dark gradient/blur overlay, rather than a separate image block above a separate text block. Confidence: 0.7
+- Prefers the agent to proactively enumerate exactly what it needs to unblock work (e.g. which credentials/config values) and let the user supply them, rather than the agent guessing or the user having to figure out what to provide. Confidence: 0.5
+- Uses Supabase (hosted Postgres) as the database backend. Confidence: 0.7
+- Prefers to hand over credentials/secrets (database passwords, connection strings) by pasting them directly into chat for the agent to write into `.env`/config files, rather than editing the files themself. Confidence: 0.6
+them directly into chat for the agent to write into `.env`/config files, rather than editing the files themself. Confidence: 0.6
