@@ -16,12 +16,18 @@ model Product {
   id             String          @id @default(cuid())
   slug           String          @unique
   name           String
+  tagline        String          @default("")
   description    String
   price          Int
   compareAtPrice Int?
   currency       String          @default("usd")
   status         ProductStatus   @default(active)
   featured       Boolean         @default(false)
+  isNew          Boolean         @default(false)
+  bestseller     Boolean         @default(false)
+  rating         Float           @default(0)
+  reviewCount    Int             @default(0)
+  highlights     String[]        @default([])
   categoryId     String
   category       Category        @relation(fields: [categoryId], references: [id])
   images         ProductImage[]

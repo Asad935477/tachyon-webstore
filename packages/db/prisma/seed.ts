@@ -29,7 +29,7 @@ const categories = [
 		slug: "accessories",
 		name: "Accessories",
 		description: "Cables, chargers, and the essentials that tie it together.",
-		image: img("photo-1601524909162-ae8725290836"),
+		image: img("photo-1600185365483-26d7a4cc7519"),
 		position: 4,
 	},
 	{
@@ -98,7 +98,7 @@ const products: ProductSeed[] = [
 		images: [
 			img("photo-1590658268037-6bf12165a8df"),
 			img("photo-1606220945770-b5b6c2c55bf1"),
-			img("photo-1590658153324-0b0e1e2e2d6a"),
+			img("photo-1600185365926-3a2ce3cdb9eb"),
 		],
 		variants: [
 			{ name: "Graphite", sku: "PBP-GPH", stock: 60, isDefault: true },
@@ -173,7 +173,7 @@ const products: ProductSeed[] = [
 		images: [
 			img("photo-1496181133206-80ce9b88a853"),
 			img("photo-1517336714731-489689fd1ca8"),
-			img("photo-1541807084-5c52b6b3adef"),
+			img("photo-1526170375885-4d8ecf77b99f"),
 		],
 		variants: [
 			{ name: "16GB / 512GB", sku: "A14-16512", stock: 12, isDefault: true },
