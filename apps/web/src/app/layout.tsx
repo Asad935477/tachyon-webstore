@@ -5,6 +5,7 @@ import "../index.css";
 import { AppShell } from "@/components/app-shell";
 import { Footer } from "@/components/footer";
 import Header from "@/components/header";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
 import Providers from "@/components/providers";
 
 const geistSans = Geist({
@@ -31,13 +32,14 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden antialiased`}
 			>
 				<Providers>
 					<AppShell>
+						<ScrollProgress />
 						<div className="grid min-h-svh grid-rows-[auto_1fr_auto]">
 							<Header />
-							<main>{children}</main>
+							<main className="min-w-0 overflow-x-clip">{children}</main>
 							<Footer />
 						</div>
 					</AppShell>
