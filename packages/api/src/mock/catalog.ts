@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const imageSchema = z.object({
 	id: z.string(),
-	url: z.string().url(),
+	url: z.string().min(1),
 	alt: z.string().nullable(),
 	position: z.number(),
 });
@@ -48,7 +48,7 @@ const categorySchema = z.object({
 	slug: z.string(),
 	name: z.string(),
 	description: z.string().nullable(),
-	image: z.string().url().nullable(),
+	image: z.string().min(1).nullable(),
 	position: z.number(),
 	_count: z.object({ products: z.number() }),
 });
@@ -66,12 +66,11 @@ const collectionSchema = z.object({
 	slug: z.string(),
 	title: z.string(),
 	description: z.string(),
-	image: z.string().url(),
+	image: z.string().min(1),
 	productIds: z.array(z.string()),
 });
 
-const img = (id: string, w = 1600, h = 1200) =>
-	`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
+const img = (id: string) => `/images/${id}.jpg`;
 
 const categoryData = [
 	{
