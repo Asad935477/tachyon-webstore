@@ -1,0 +1,43 @@
+model Order {
+  id              String      @id @default(cuid())
+  userId          String?
+  email           String
+  stripeSessionId String      @unique
+  status          OrderStatus @default(pending)
+  subtotal        Int
+  shipping        Int         @default(0)
+  tax             Int         @default(0)
+  total           Int
+  currency        String      @default("usd")
+  shippingAddress Json?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([userId])
+  @@map("order")
+}
+
+enum OrderStatus {
+  pending
+  paid
+  fulfilled
+  cancelled
+  refunded
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  variantId String?
+  name      String
+  sku       String?
+  price     Int
+  quantity  Int
+  image     String?
+
+  @@index([orderId])
+  @@map("order_item")
+}

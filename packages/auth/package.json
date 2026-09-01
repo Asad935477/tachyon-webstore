@@ -1,24 +1,24 @@
 {
-  "name": "@tachyon-webstore/auth",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {},
-  "dependencies": {
-    "@tachyon-webstore/db": "workspace:*",
-    "@tachyon-webstore/env": "workspace:*",
-    "better-auth": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@tachyon-webstore/config": "workspace:*",
-    "typescript": "catalog:"
-  }
+	"name": "@tachyon-webstore/auth",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {},
+	"dependencies": {
+		"@tachyon-webstore/db": "workspace:*",
+		"@tachyon-webstore/env": "workspace:*",
+		"better-auth": "catalog:",
+		"dotenv": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@tachyon-webstore/config": "workspace:*",
+		"typescript": "catalog:"
+	}
 }

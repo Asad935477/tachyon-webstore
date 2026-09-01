@@ -1,27 +1,28 @@
 {
-  "name": "@tachyon-webstore/api",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {},
-  "dependencies": {
-    "@tachyon-webstore/auth": "workspace:*",
-    "@tachyon-webstore/db": "workspace:*",
-    "@tachyon-webstore/env": "workspace:*",
-    "@trpc/client": "catalog:",
-    "@trpc/server": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@tachyon-webstore/config": "workspace:*",
-    "hono": "catalog:",
-    "typescript": "catalog:"
-  }
+	"name": "@tachyon-webstore/api",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {},
+	"dependencies": {
+		"@tachyon-webstore/auth": "workspace:*",
+		"@tachyon-webstore/db": "workspace:*",
+		"@tachyon-webstore/env": "workspace:*",
+		"@trpc/client": "catalog:",
+		"@trpc/server": "catalog:",
+		"dotenv": "catalog:",
+		"stripe": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@tachyon-webstore/config": "workspace:*",
+		"hono": "catalog:",
+		"typescript": "catalog:"
+	}
 }

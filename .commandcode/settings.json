@@ -1,0 +1,12 @@
+{
+	"permissions": {
+		"allow": [
+			"Shell(npm:*)",
+			"Shell(npx shadcn@latest add badge separator sheet select slider accordion tabs scroll-area radio-group carousel pagination breadcrumb dialog -c packages/ui --yes)",
+			"Shell(npx shadcn@latest add sheet carousel pagination dialog -c packages/ui --yes --overwrite)",
+			"Shell(pnpm:*)"
+		],
+		"deny": [],
+		"defaultMode": "default"
+	}
+}

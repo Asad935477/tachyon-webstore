@@ -1,34 +1,35 @@
 {
-  "name": "@tachyon-webstore/db",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {
-    "db:push": "prisma db push",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:migrate:deploy": "prisma migrate deploy",
-    "postinstall": "prisma generate",
-    "db:studio": "prisma studio"
-  },
-  "dependencies": {
-    "@prisma/adapter-pg": "^7.9.1",
-    "@prisma/client": "^7.9.1",
-    "@tachyon-webstore/env": "workspace:*",
-    "dotenv": "catalog:",
-    "pg": "^8.22.0",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@tachyon-webstore/config": "workspace:*",
-    "@types/pg": "^8.20.0",
-    "prisma": "^7.9.1",
-    "typescript": "catalog:"
-  }
+	"name": "@tachyon-webstore/db",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {
+		"db:push": "prisma db push",
+		"db:generate": "prisma generate",
+		"db:migrate": "prisma migrate dev",
+		"db:migrate:deploy": "prisma migrate deploy",
+		"postinstall": "prisma generate",
+		"db:studio": "prisma studio",
+		"db:seed": "bun run prisma/seed.ts"
+	},
+	"dependencies": {
+		"@prisma/adapter-pg": "^7.9.1",
+		"@prisma/client": "^7.9.1",
+		"@tachyon-webstore/env": "workspace:*",
+		"dotenv": "catalog:",
+		"pg": "^8.22.0",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@tachyon-webstore/config": "workspace:*",
+		"@types/pg": "^8.20.0",
+		"prisma": "^7.9.1",
+		"typescript": "catalog:"
+	}
 }
