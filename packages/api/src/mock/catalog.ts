@@ -7,31 +7,26 @@ const imageSchema = z.object({
 	position: z.number(),
 });
 
-const variantSchema = z.object({
-	id: z.string(),
-	name: z.string(),
-	sku: z.string(),
-	price: z.number().nullable(),
-	stock: z.number(),
-	isDefault: z.boolean(),
-	position: z.number(),
-});
-
 const categoryRefSchema = z.object({
 	id: z.string(),
 	slug: z.string(),
 	name: z.string(),
 });
 
+/**
+ * Mirrors the strict ERD PRODUCT model: id, title, price, stock, categoryId —
+ * plus the auxiliary storefront fields the UI needs (slug, description,
+ * imagery, ratings, …). `stock` lives on the PRODUCT itself per the ERD.
+ */
 const productSchema = z.object({
 	id: z.string(),
 	slug: z.string(),
-	name: z.string(),
-	tagline: z.string(),
+	title: z.string(),
 	description: z.string(),
 	price: z.number(),
 	compareAtPrice: z.number().nullable(),
 	currency: z.string(),
+	stock: z.number().int().nonnegative(),
 	featured: z.boolean(),
 	isNew: z.boolean(),
 	bestseller: z.boolean(),
@@ -39,7 +34,6 @@ const productSchema = z.object({
 	reviewCount: z.number(),
 	category: categoryRefSchema,
 	images: z.array(imageSchema),
-	variants: z.array(variantSchema),
 	highlights: z.array(z.string()),
 });
 
@@ -127,13 +121,13 @@ const productData = [
 	{
 		id: "p-sonic-drift",
 		slug: "sonic-drift-wireless-headphones",
-		name: "Sonic Drift",
-		tagline: "Silence, refined.",
+		title: "Sonic Drift",
 		description:
 			"Over-ear headphones with adaptive noise cancellation, a 40-hour battery, and spatial audio that follows the movement of your head. Memory-foam ear cups and a featherweight frame make them disappear after the first song.",
 		price: 34900,
 		compareAtPrice: 39900,
 		currency: "usd",
+		stock: 85,
 		featured: true,
 		isNew: false,
 		bestseller: true,
@@ -145,11 +139,6 @@ const productData = [
 			img("photo-1583394838336-acd977736f90"),
 			img("photo-1484704849700-f032a568e944"),
 		],
-		variants: [
-			{ name: "Matte Black", sku: "SDH-BLK", price: null, stock: 42, isDefault: true },
-			{ name: "Arctic White", sku: "SDH-WHT", price: null, stock: 28, isDefault: false },
-			{ name: "Sandstone", sku: "SDH-SND", price: 35900, stock: 15, isDefault: false },
-		],
 		highlights: [
 			"Adaptive active noise cancellation",
 			"40-hour battery life",
@@ -160,13 +149,13 @@ const productData = [
 	{
 		id: "p-pulse-buds",
 		slug: "pulse-buds-pro",
-		name: "Pulse Buds Pro",
-		tagline: "Sound that moves with you.",
+		title: "Pulse Buds Pro",
 		description:
 			"True wireless earbuds with hybrid drivers, six-microphone call clarity, and a pocketable wireless-charging case. Sweat and dust resistant for wherever the day takes you.",
 		price: 19900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 107,
 		featured: true,
 		isNew: true,
 		bestseller: false,
@@ -178,11 +167,6 @@ const productData = [
 			img("photo-1606220945770-b5b6c2c55bf1"),
 			img("photo-1600185365926-3a2ce3cdb9eb"),
 		],
-		variants: [
-			{ name: "Graphite", sku: "PBP-GPH", price: null, stock: 60, isDefault: true },
-			{ name: "Ivory", sku: "PBP-IVY", price: null, stock: 35, isDefault: false },
-			{ name: "Mint", sku: "PBP-MNT", price: 21900, stock: 12, isDefault: false },
-		],
 		highlights: [
 			"Hybrid dual-driver acoustic system",
 			"6-mic adaptive beamforming",
@@ -193,13 +177,13 @@ const productData = [
 	{
 		id: "p-echo-pillar",
 		slug: "echo-pillar-smart-speaker",
-		name: "Echo Pillar",
-		tagline: "A room in full color.",
+		title: "Echo Pillar",
 		description:
 			"Room-filling 360-degree sound wrapped in a warm fabric finish. Multi-room pairing and a built-in voice assistant make it the quiet center of the home.",
 		price: 14900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 72,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -209,10 +193,6 @@ const productData = [
 		images: [
 			img("photo-1608043152269-423dbba4e7e1"),
 			img("photo-1545454675-3531b543be5d"),
-		],
-		variants: [
-			{ name: "Charcoal", sku: "EPS-CHR", price: null, stock: 50, isDefault: true },
-			{ name: "Cloud", sku: "EPS-CLD", price: null, stock: 22, isDefault: false },
 		],
 		highlights: [
 			"360° room-filling sound",
@@ -224,13 +204,13 @@ const productData = [
 	{
 		id: "p-meridian",
 		slug: "meridian-smartwatch",
-		name: "Meridian",
-		tagline: "Time, worn lightly.",
+		title: "Meridian",
 		description:
 			"A titanium smartwatch with an always-on AMOLED display, dual-band GPS, and up to 10 days of battery. Built for the long view, finished to disappear on the wrist.",
 		price: 42900,
 		compareAtPrice: 49900,
 		currency: "usd",
+		stock: 52,
 		featured: true,
 		isNew: false,
 		bestseller: true,
@@ -242,11 +222,6 @@ const productData = [
 			img("photo-1508685096489-7aacd43bd3b1"),
 			img("photo-1523275335684-37898b6baf30"),
 		],
-		variants: [
-			{ name: "Titanium / 42mm", sku: "MSW-T42", price: null, stock: 20, isDefault: true },
-			{ name: "Titanium / 46mm", sku: "MSW-T46", price: 44900, stock: 18, isDefault: false },
-			{ name: "Midnight / 42mm", sku: "MSW-M42", price: null, stock: 14, isDefault: false },
-		],
 		highlights: [
 			"Always-on AMOLED display",
 			"Dual-band GPS",
@@ -257,13 +232,13 @@ const productData = [
 	{
 		id: "p-cadence",
 		slug: "cadence-fitness-band",
-		name: "Cadence",
-		tagline: "Small signal, big picture.",
+		title: "Cadence",
 		description:
 			"A featherweight tracker with heart-rate, sleep, and SpO2 monitoring plus a week of battery in one charge. The essential metrics, minus the noise.",
 		price: 9900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 195,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -273,11 +248,6 @@ const productData = [
 		images: [
 			img("photo-1557935728-e6d1eaabe558"),
 			img("photo-1579586337278-3befd40fd17a"),
-		],
-		variants: [
-			{ name: "Black / S", sku: "CFB-BKS", price: null, stock: 80, isDefault: true },
-			{ name: "Black / M", sku: "CFB-BKM", price: null, stock: 75, isDefault: false },
-			{ name: "Lilac / S", sku: "CFB-LIS", price: null, stock: 40, isDefault: false },
 		],
 		highlights: [
 			"Continuous heart-rate tracking",
@@ -289,13 +259,13 @@ const productData = [
 	{
 		id: "p-aeron-14",
 		slug: "aeron-14-ultrabook",
-		name: "Aeron 14",
-		tagline: "Think at the speed of light.",
+		title: "Aeron 14",
 		description:
 			"A 14-inch magnesium-alloy ultrabook with a 2.8K OLED panel, all-day battery, and a whisper-quiet keyboard. Light enough to forget, powerful enough to remember.",
 		price: 149900,
 		compareAtPrice: 169900,
 		currency: "usd",
+		stock: 20,
 		featured: true,
 		isNew: true,
 		bestseller: true,
@@ -307,10 +277,6 @@ const productData = [
 			img("photo-1517336714731-489689fd1ca8"),
 			img("photo-1526170375885-4d8ecf77b99f"),
 		],
-		variants: [
-			{ name: "16GB / 512GB", sku: "A14-16512", price: null, stock: 12, isDefault: true },
-			{ name: "32GB / 1TB", sku: "A14-321T", price: 174900, stock: 8, isDefault: false },
-		],
 		highlights: [
 			"2.8K OLED 120Hz display",
 			"Magnesium-alloy chassis",
@@ -321,13 +287,13 @@ const productData = [
 	{
 		id: "p-aeron-slate",
 		slug: "aeron-slate-11",
-		name: "Aeron Slate 11",
-		tagline: "A canvas for every idea.",
+		title: "Aeron Slate 11",
 		description:
 			"An 11-inch tablet with a laminated 120Hz display, magnetic keyboard, and a stylus that feels like ink. Sketch, write, and think on one surface.",
 		price: 79900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 40,
 		featured: true,
 		isNew: false,
 		bestseller: false,
@@ -339,10 +305,6 @@ const productData = [
 			img("photo-1561154464-82e9adf32764"),
 			img("photo-1585790050230-5dd28404ccb9"),
 		],
-		variants: [
-			{ name: "Wi-Fi / 256GB", sku: "AS11-256", price: null, stock: 25, isDefault: true },
-			{ name: "Wi-Fi / 512GB", sku: "AS11-512", price: 94900, stock: 15, isDefault: false },
-		],
 		highlights: [
 			"Laminated 120Hz display",
 			"Pressure-sensitive stylus",
@@ -353,25 +315,26 @@ const productData = [
 	{
 		id: "p-volt-charger",
 		slug: "volt-gan-charger-100w",
-		name: "Volt GaN 100W",
-		tagline: "Power, compressed.",
+		title: "Volt GaN 100W",
 		description:
 			"A compact gallium-nitride charger that powers a laptop, phone, and earbuds at once without the bulk. Small enough for the pocket, capable enough for the desk.",
 		price: 6900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 120,
 		featured: false,
 		isNew: false,
 		bestseller: false,
 		rating: 4.6,
 		reviewCount: 903,
-		category: { id: "cat-accessories", slug: "accessories", name: "Accessories" },
+		category: {
+			id: "cat-accessories",
+			slug: "accessories",
+			name: "Accessories",
+		},
 		images: [
 			img("photo-1583863788434-e58a36330cf0"),
 			img("photo-1609091839311-d5365f9ff1c5"),
-		],
-		variants: [
-			{ name: "Single Port", sku: "VGC-100", price: null, stock: 120, isDefault: true },
 		],
 		highlights: [
 			"100W GaN output",
@@ -383,26 +346,26 @@ const productData = [
 	{
 		id: "p-flow-power",
 		slug: "flow-magnetic-power-bank",
-		name: "Flow Magnetic Power Bank",
-		tagline: "Keep the current flowing.",
+		title: "Flow Magnetic Power Bank",
 		description:
 			"A 10,000mAh magnetic power bank that snaps to your phone and tops it up wirelessly while you go. No cables, no fuss.",
 		price: 5900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 150,
 		featured: true,
 		isNew: false,
 		bestseller: true,
 		rating: 4.8,
 		reviewCount: 1120,
-		category: { id: "cat-accessories", slug: "accessories", name: "Accessories" },
+		category: {
+			id: "cat-accessories",
+			slug: "accessories",
+			name: "Accessories",
+		},
 		images: [
 			img("photo-1609091839311-d5365f9ff1c5"),
 			img("photo-1610945265064-0e34e5519bbf"),
-		],
-		variants: [
-			{ name: "Graphite", sku: "FMP-GPH", price: null, stock: 90, isDefault: true },
-			{ name: "Sand", sku: "FMP-SND", price: null, stock: 60, isDefault: false },
 		],
 		highlights: [
 			"10,000mAh capacity",
@@ -414,26 +377,26 @@ const productData = [
 	{
 		id: "p-orbit-keyboard",
 		slug: "orbit-mechanical-keyboard",
-		name: "Orbit Keyboard",
-		tagline: "Every keystroke, weighted.",
+		title: "Orbit Keyboard",
 		description:
 			"A low-profile mechanical keyboard with hot-swappable switches, gasket mounting, and per-key RGB. Tactile, quiet, and built to disappear under your fingers.",
 		price: 15900,
 		compareAtPrice: 18900,
 		currency: "usd",
+		stock: 77,
 		featured: false,
 		isNew: true,
 		bestseller: false,
 		rating: 4.7,
 		reviewCount: 348,
-		category: { id: "cat-accessories", slug: "accessories", name: "Accessories" },
+		category: {
+			id: "cat-accessories",
+			slug: "accessories",
+			name: "Accessories",
+		},
 		images: [
 			img("photo-1618384887929-16ec33fab9ef"),
 			img("photo-1587829741301-dc798b83add3"),
-		],
-		variants: [
-			{ name: "Slate / Linear", sku: "OMK-SLL", price: null, stock: 45, isDefault: true },
-			{ name: "Slate / Tactile", sku: "OMK-SLT", price: null, stock: 32, isDefault: false },
 		],
 		highlights: [
 			"Hot-swappable switches",
@@ -445,13 +408,13 @@ const productData = [
 	{
 		id: "p-halo-27",
 		slug: "halo-27-4k-monitor",
-		name: "Halo 27",
-		tagline: "Color, in full command.",
+		title: "Halo 27",
 		description:
 			"A 27-inch 4K monitor with 98% DCI-P3 color, USB-C single-cable connection, and a slim three-sided borderless design. Made for the ones who sweat the details.",
 		price: 54900,
 		compareAtPrice: 64900,
 		currency: "usd",
+		stock: 30,
 		featured: true,
 		isNew: false,
 		bestseller: true,
@@ -461,9 +424,6 @@ const productData = [
 		images: [
 			img("photo-1547119957-637f8679db1e"),
 			img("photo-1527443224154-c4a3942d3acf"),
-		],
-		variants: [
-			{ name: "27-inch", sku: "H27-4K", price: null, stock: 30, isDefault: true },
 		],
 		highlights: [
 			"27-inch 4K panel",
@@ -475,13 +435,13 @@ const productData = [
 	{
 		id: "p-halo-32",
 		slug: "halo-32-curved-display",
-		name: "Halo 32",
-		tagline: "Step into the frame.",
+		title: "Halo 32",
 		description:
 			"An immersive 32-inch curved QHD display with a 165Hz refresh rate and adaptive sync for smooth motion. Game, create, and lose track of time.",
 		price: 44900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 18,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -491,9 +451,6 @@ const productData = [
 		images: [
 			img("photo-1527443224154-c4a3942d3acf"),
 			img("photo-1547119957-637f8679db1e"),
-		],
-		variants: [
-			{ name: "32-inch Curved", sku: "H32-QHD", price: null, stock: 18, isDefault: true },
 		],
 		highlights: [
 			"32-inch curved QHD",
@@ -505,13 +462,13 @@ const productData = [
 	{
 		id: "p-lumen-projector",
 		slug: "lumen-portable-projector",
-		name: "Lumen Projector",
-		tagline: "Bring the theater home.",
+		title: "Lumen Projector",
 		description:
 			"A pocket-sized 1080p projector with autofocus, keystone correction, and a built-in battery for movie night anywhere. Cinema, minus the cords.",
 		price: 37900,
 		compareAtPrice: 42900,
 		currency: "usd",
+		stock: 22,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -521,9 +478,6 @@ const productData = [
 		images: [
 			img("photo-1517604931442-7e0c8ed2963c"),
 			img("photo-1489599849927-2ee91cede3ba"),
-		],
-		variants: [
-			{ name: "Standard", sku: "LPP-STD", price: null, stock: 22, isDefault: true },
 		],
 		highlights: [
 			"1080p native resolution",
@@ -535,13 +489,13 @@ const productData = [
 	{
 		id: "p-lumen-bulb",
 		slug: "lumen-smart-bulb-2-pack",
-		name: "Lumen Bulb",
-		tagline: "Set the scene.",
+		title: "Lumen Bulb",
 		description:
 			"Tunable white and full-color smart bulbs with scheduling, scenes, and voice control built in. The right light for every hour.",
 		price: 3900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 140,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -551,9 +505,6 @@ const productData = [
 		images: [
 			img("photo-1558002038-1055907df827"),
 			img("photo-1564053489984-317bbd824340"),
-		],
-		variants: [
-			{ name: "E26 / 2-Pack", sku: "LSB-2P", price: null, stock: 140, isDefault: true },
 		],
 		highlights: [
 			"16M colors",
@@ -565,13 +516,13 @@ const productData = [
 	{
 		id: "p-nest-thermostat",
 		slug: "nest-thermostat-slim",
-		name: "Nest Thermostat Slim",
-		tagline: "Comfort, on autopilot.",
+		title: "Nest Thermostat Slim",
 		description:
 			"A slim smart thermostat that learns your schedule and helps trim energy use without the clutter. A calmer home, with less to think about.",
 		price: 24900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 25,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -581,9 +532,6 @@ const productData = [
 		images: [
 			img("photo-1545259741-2ea3ebf61fa3"),
 			img("photo-1558002038-1055907df827"),
-		],
-		variants: [
-			{ name: "White", sku: "NTS-WHT", price: null, stock: 25, isDefault: true },
 		],
 		highlights: [
 			"Learns your schedule",
@@ -595,26 +543,26 @@ const productData = [
 	{
 		id: "p-falcon-drone",
 		slug: "falcon-4k-drone",
-		name: "Falcon 4K",
-		tagline: "See it from above.",
+		title: "Falcon 4K",
 		description:
 			"A foldable 4K drone with a 3-axis gimbal, 30-minute flight time, and intelligent follow modes for cinematic captures. The sky, your studio.",
 		price: 69900,
 		compareAtPrice: 79900,
 		currency: "usd",
+		stock: 25,
 		featured: true,
 		isNew: true,
 		bestseller: false,
 		rating: 4.8,
 		reviewCount: 534,
-		category: { id: "cat-accessories", slug: "accessories", name: "Accessories" },
+		category: {
+			id: "cat-accessories",
+			slug: "accessories",
+			name: "Accessories",
+		},
 		images: [
 			img("photo-1473968512647-3e447244af8f"),
 			img("photo-1508614589041-895b88991e3e"),
-		],
-		variants: [
-			{ name: "Standard Kit", sku: "F4K-STD", price: null, stock: 16, isDefault: true },
-			{ name: "Fly More Kit", sku: "F4K-FM", price: 79900, stock: 9, isDefault: false },
 		],
 		highlights: [
 			"4K / 60fps camera",
@@ -626,26 +574,26 @@ const productData = [
 	{
 		id: "p-aero-mouse",
 		slug: "aero-precision-mouse",
-		name: "Aero Mouse",
-		tagline: "Precision in your palm.",
+		title: "Aero Mouse",
 		description:
 			"An ultra-light wireless mouse with an 8K polling sensor and a sculpted shell that fits like an extension of the hand. Zero drag, full control.",
 		price: 12900,
 		compareAtPrice: null,
 		currency: "usd",
+		stock: 95,
 		featured: false,
 		isNew: true,
 		bestseller: false,
 		rating: 4.7,
 		reviewCount: 244,
-		category: { id: "cat-accessories", slug: "accessories", name: "Accessories" },
+		category: {
+			id: "cat-accessories",
+			slug: "accessories",
+			name: "Accessories",
+		},
 		images: [
 			img("photo-1527864550417-7fd91fc51a46"),
 			img("photo-1586816879360-004f5b0c51e5"),
-		],
-		variants: [
-			{ name: "Graphite", sku: "AM-GPH", price: null, stock: 55, isDefault: true },
-			{ name: "White", sku: "AM-WHT", price: null, stock: 40, isDefault: false },
 		],
 		highlights: [
 			"49g ultra-light body",
@@ -657,13 +605,13 @@ const productData = [
 	{
 		id: "p-sol-lamp",
 		slug: "sol-ambient-lamp",
-		name: "Sol Lamp",
-		tagline: "Light, softened.",
+		title: "Sol Lamp",
 		description:
 			"A sculptural ambient lamp with touch dimming and a warm, sun-like glow. A quiet object that changes the room.",
 		price: 8900,
 		compareAtPrice: 10900,
 		currency: "usd",
+		stock: 70,
 		featured: false,
 		isNew: false,
 		bestseller: false,
@@ -673,9 +621,6 @@ const productData = [
 		images: [
 			img("photo-1507473885765-e6ed057f782c"),
 			img("photo-1513506003901-1e6a229e2d15"),
-		],
-		variants: [
-			{ name: "Warm White", sku: "SOL-WW", price: null, stock: 70, isDefault: true },
 		],
 		highlights: [
 			"Touch dimming",
@@ -736,7 +681,12 @@ const collectionData = [
 		title: "New Arrivals",
 		description: "Fresh off the bench, ready for the desk.",
 		image: img("photo-1526738549149-8e07eca6c147"),
-		productIds: ["p-pulse-buds", "p-aeron-14", "p-falcon-drone", "p-aero-mouse"],
+		productIds: [
+			"p-pulse-buds",
+			"p-aeron-14",
+			"p-falcon-drone",
+			"p-aero-mouse",
+		],
 	},
 	{
 		id: "col-travel",
@@ -750,7 +700,9 @@ const collectionData = [
 
 const parsedCategories = z.array(categorySchema).parse(
 	categoryData.map((category) => {
-		const products = productData.filter((p) => p.category.slug === category.slug).length;
+		const products = productData.filter(
+			(p) => p.category.slug === category.slug,
+		).length;
 		return { ...category, _count: { products } };
 	}),
 );
@@ -761,12 +713,7 @@ const parsedProducts = z.array(productSchema).parse(
 		images: product.images.map((url, index) => ({
 			id: `${product.id}-img-${index}`,
 			url,
-			alt: `${product.name} image ${index + 1}`,
-			position: index,
-		})),
-		variants: product.variants.map((variant, index) => ({
-			...variant,
-			id: `${product.id}-var-${index}`,
+			alt: `${product.title} image ${index + 1}`,
 			position: index,
 		})),
 	})),
@@ -820,8 +767,7 @@ export function getMockProducts(input: {
 		const q = input.q.toLowerCase();
 		items = items.filter(
 			(product) =>
-				product.name.toLowerCase().includes(q) ||
-				product.tagline.toLowerCase().includes(q) ||
+				product.title.toLowerCase().includes(q) ||
 				product.description.toLowerCase().includes(q),
 		);
 	}

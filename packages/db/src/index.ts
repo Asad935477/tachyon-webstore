@@ -3,6 +3,19 @@ import { env } from "@tachyon-webstore/env/server";
 
 import { PrismaClient } from "../prisma/generated/client";
 
+export type {
+	Account,
+	Category,
+	Order,
+	OrderItem,
+	Product,
+	ProductImage,
+	ProductStatus,
+	Session,
+	User,
+	Verification,
+} from "../prisma/generated/client";
+
 export function createPrismaClient() {
 	const adapter = new PrismaPg({
 		connectionString: env.DATABASE_URL,

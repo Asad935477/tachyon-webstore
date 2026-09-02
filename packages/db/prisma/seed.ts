@@ -29,9 +29,7 @@ async function main() {
 	}
 
 	const dbCategories = await prisma.category.findMany();
-	const categoryBySlug = new Map(
-		dbCategories.map((c) => [c.slug, c]),
-	);
+	const categoryBySlug = new Map(dbCategories.map((c) => [c.slug, c]));
 
 	console.log("Seeding products...");
 	for (const product of mockProducts) {
@@ -43,12 +41,12 @@ async function main() {
 		await prisma.product.upsert({
 			where: { slug: product.slug },
 			update: {
-				name: product.name,
-				tagline: product.tagline,
+				title: product.title,
 				description: product.description,
 				price: product.price,
 				compareAtPrice: product.compareAtPrice,
 				currency: product.currency,
+				stock: product.stock,
 				featured: product.featured,
 				isNew: product.isNew,
 				bestseller: product.bestseller,
@@ -61,29 +59,18 @@ async function main() {
 					create: product.images.map((image, index) => ({
 						url: image.url,
 						alt: image.alt,
-						position: index,
-					})),
-				},
-				variants: {
-					deleteMany: {},
-					create: product.variants.map((variant, index) => ({
-						name: variant.name,
-						sku: variant.sku,
-						price: variant.price,
-						stock: variant.stock,
-						isDefault: variant.isDefault,
 						position: index,
 					})),
 				},
 			},
 			create: {
 				slug: product.slug,
-				name: product.name,
-				tagline: product.tagline,
+				title: product.title,
 				description: product.description,
 				price: product.price,
 				compareAtPrice: product.compareAtPrice,
 				currency: product.currency,
+				stock: product.stock,
 				featured: product.featured,
 				isNew: product.isNew,
 				bestseller: product.bestseller,
@@ -95,16 +82,6 @@ async function main() {
 					create: product.images.map((image, index) => ({
 						url: image.url,
 						alt: image.alt,
-						position: index,
-					})),
-				},
-				variants: {
-					create: product.variants.map((variant, index) => ({
-						name: variant.name,
-						sku: variant.sku,
-						price: variant.price,
-						stock: variant.stock,
-						isDefault: variant.isDefault,
 						position: index,
 					})),
 				},

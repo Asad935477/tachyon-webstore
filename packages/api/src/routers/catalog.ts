@@ -1,6 +1,6 @@
 import prisma from "@tachyon-webstore/db";
 import { z } from "zod";
-
+import { publicProcedure, router } from "../index";
 import {
 	getMockCategories,
 	getMockCollection,
@@ -11,12 +11,10 @@ import {
 	getMockProducts,
 	getMockTestimonials,
 } from "../mock/catalog";
-import { publicProcedure, router } from "../index";
 
 const productInclude = {
 	category: true,
 	images: { orderBy: { position: "asc" as const } },
-	variants: { orderBy: { position: "asc" as const } },
 } as const;
 
 const sortInput = z
@@ -81,7 +79,9 @@ export const catalogRouter = router({
 				...(input.q
 					? {
 							OR: [
-								{ name: { contains: input.q, mode: "insensitive" as const } },
+								{
+									title: { contains: input.q, mode: "insensitive" as const },
+								},
 								{
 									description: {
 										contains: input.q,
