@@ -7,7 +7,7 @@ export function Marquee({ items }: { items: string[] }) {
 			{repeated.map((item, index) => (
 				<span
 					key={`${keyPrefix}-${item}-${index}`}
-					className="flex shrink-0 items-center gap-3 text-sm font-medium text-muted-foreground"
+					className="flex shrink-0 items-center gap-3 font-medium text-muted-foreground text-sm"
 				>
 					<span className="size-1.5 rounded-full bg-primary" />
 					{item}
@@ -23,11 +23,14 @@ export function Marquee({ items }: { items: string[] }) {
 
 			<div className="marquee-track flex w-max">
 				{group("a")}
-				<div className="flex shrink-0 items-center gap-14 pr-14" aria-hidden="true">
+				<div
+					className="flex shrink-0 items-center gap-14 pr-14"
+					aria-hidden="true"
+				>
 					{repeated.map((item, index) => (
 						<span
 							key={`b-${item}-${index}`}
-							className="flex shrink-0 items-center gap-3 text-sm font-medium text-muted-foreground"
+							className="flex shrink-0 items-center gap-3 font-medium text-muted-foreground text-sm"
 						>
 							<span className="size-1.5 rounded-full bg-primary" />
 							{item}

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { Compass, Heart, Leaf, Sparkles } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -37,7 +37,7 @@ export default function AboutPage() {
 							initial={{ opacity: 0, y: 16 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-							className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs text-muted-foreground"
+							className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-muted-foreground text-xs"
 						>
 							<span className="size-1.5 rounded-full bg-primary" />
 							Our philosophy
@@ -46,8 +46,12 @@ export default function AboutPage() {
 						<motion.h1
 							initial={{ opacity: 0, y: 24 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-							className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl"
+							transition={{
+								duration: 0.7,
+								delay: 0.1,
+								ease: [0.22, 1, 0.36, 1],
+							}}
+							className="font-semibold text-5xl leading-[1.05] tracking-tight sm:text-6xl"
 						>
 							Less, but
 							<br />
@@ -57,7 +61,11 @@ export default function AboutPage() {
 						<motion.p
 							initial={{ opacity: 0, y: 16 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+							transition={{
+								duration: 0.7,
+								delay: 0.2,
+								ease: [0.22, 1, 0.36, 1],
+							}}
 							className="max-w-xl text-lg text-muted-foreground"
 						>
 							Tachyon exists for people who would rather own a few excellent
@@ -87,10 +95,10 @@ export default function AboutPage() {
 
 			<section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
 				<Reveal className="mb-12 text-center">
-					<p className="mb-3 text-xs font-medium tracking-widest text-muted-foreground uppercase">
+					<p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-widest">
 						What we stand for
 					</p>
-					<h2 className="text-4xl font-semibold tracking-tight">
+					<h2 className="font-semibold text-4xl tracking-tight">
 						Three principles, one standard.
 					</h2>
 				</Reveal>
@@ -105,8 +113,8 @@ export default function AboutPage() {
 								<div className="mb-6 flex size-12 items-center justify-center rounded-2xl bg-muted text-primary transition-transform duration-300 group-hover:scale-110">
 									<value.icon className="size-6" />
 								</div>
-								<h3 className="text-xl font-semibold">{value.title}</h3>
-								<p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+								<h3 className="font-semibold text-xl">{value.title}</h3>
+								<p className="mt-3 text-muted-foreground text-sm leading-relaxed">
 									{value.body}
 								</p>
 							</motion.div>
@@ -120,12 +128,12 @@ export default function AboutPage() {
 			<section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
 				<div className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-primary/15 via-background to-chart-2/15 p-10 text-center sm:p-16">
 					<Sparkles className="mx-auto mb-6 size-8 text-primary" />
-					<h2 className="text-4xl font-semibold tracking-tight">
+					<h2 className="font-semibold text-4xl tracking-tight">
 						Objects for a faster life.
 					</h2>
 					<p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-						Start with the pieces that matter most — and discover the
-						difference considered design makes.
+						Start with the pieces that matter most — and discover the difference
+						considered design makes.
 					</p>
 					<Reveal className="mt-8" delay={0.1}>
 						<motion.div
@@ -134,7 +142,7 @@ export default function AboutPage() {
 						>
 							<a
 								href="/products"
-								className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/80"
+								className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 font-medium text-primary-foreground text-sm hover:bg-primary/80"
 							>
 								Browse the catalog
 							</a>

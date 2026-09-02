@@ -1,8 +1,8 @@
 "use client";
 
 import { Badge } from "@tachyon-webstore/ui/components/badge";
-import { motion, useReducedMotion } from "motion/react";
 import { Plus, Star } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -17,22 +17,20 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 	const firstImage = product.images[0]?.url;
 	const onSale =
 		product.compareAtPrice !== null && product.compareAtPrice > product.price;
-	const defaultVariant =
-		product.variants.find((v) => v.isDefault) ?? product.variants[0];
+	const outOfStock = product.stock <= 0;
 
 	function quickAdd(e: React.MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (!defaultVariant) {
+		if (outOfStock) {
+			toast.error("This product is out of stock.");
 			return;
 		}
 		addItem({
 			productId: product.id,
-			variantId: defaultVariant.id,
 			slug: product.slug,
-			name: product.name,
-			variantName: product.variants.length > 1 ? defaultVariant.name : undefined,
-			price: defaultVariant.price ?? product.price,
+			name: product.title,
+			price: product.price,
 			image: product.images[0]?.url,
 			quantity: 1,
 		});
@@ -49,14 +47,14 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 				{firstImage ? (
 					<Image
 						src={firstImage}
-						alt={product.images[0]?.alt ?? product.name}
+						alt={product.images[0]?.alt ?? product.title}
 						fill
 						sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
 						className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
 					/>
 				) : (
 					<div className="flex h-full items-center justify-center text-muted-foreground">
-						{product.name}
+						{product.title}
 					</div>
 				)}
 
@@ -64,7 +62,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 				<div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
 
 				{/* Badges */}
-				<div className="absolute left-3 top-3 flex flex-col gap-1.5">
+				<div className="absolute top-3 left-3 flex flex-col gap-1.5">
 					{onSale ? <Badge variant="secondary">Sale</Badge> : null}
 					{product.isNew ? <Badge variant="outline">New</Badge> : null}
 					{product.bestseller ? (
@@ -76,18 +74,18 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 				<button
 					type="button"
 					onClick={quickAdd}
-					className="absolute right-3 top-3 flex size-9 translate-y-2 items-center justify-center rounded-full bg-white/90 text-foreground opacity-0 shadow-lg backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-white"
-					aria-label={`Add ${product.name} to cart`}
+					className="absolute top-3 right-3 flex size-9 translate-y-2 items-center justify-center rounded-full bg-white/90 text-foreground opacity-0 shadow-lg backdrop-blur transition-all duration-300 hover:bg-white group-hover:translate-y-0 group-hover:opacity-100"
+					aria-label={`Add ${product.title} to cart`}
 				>
 					<Plus className="size-4" />
 				</button>
 
 				{/* Text overlay */}
 				<div className="absolute inset-x-0 bottom-0 p-4">
-					<div className="mb-1 flex items-center gap-1 text-xs text-white/70">
+					<div className="mb-1 flex items-center gap-1 text-white/70 text-xs">
 						{product.category.name}
 					</div>
-					<h3 className="truncate font-medium text-white">{product.name}</h3>
+					<h3 className="truncate font-medium text-white">{product.title}</h3>
 
 					<div className="mt-1 flex items-center gap-1.5">
 						<div className="flex items-center gap-0.5">
@@ -102,10 +100,10 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 								/>
 							))}
 						</div>
-						<span className="text-xs text-white/80">
+						<span className="text-white/80 text-xs">
 							{product.rating.toFixed(1)}
 						</span>
-						<span className="text-xs text-white/50">
+						<span className="text-white/50 text-xs">
 							({product.reviewCount})
 						</span>
 					</div>
@@ -115,7 +113,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
 							{formatPrice(product.price, product.currency)}
 						</span>
 						{onSale ? (
-							<span className="text-xs text-white/60 line-through">
+							<span className="text-white/60 text-xs line-through">
 								{formatPrice(product.compareAtPrice ?? 0, product.currency)}
 							</span>
 						) : null}

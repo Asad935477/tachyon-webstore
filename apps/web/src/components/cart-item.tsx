@@ -37,11 +37,6 @@ export function CartItemRow({ item }: { item: CartItem }) {
 						>
 							{item.name}
 						</Link>
-						{item.variantName ? (
-							<div className="text-muted-foreground text-xs">
-								{item.variantName}
-							</div>
-						) : null}
 					</div>
 					<Button
 						variant="ghost"

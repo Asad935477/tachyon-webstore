@@ -1,14 +1,30 @@
 "use client";
 
-import { Rocket, RefreshCw, ShieldCheck, Truck } from "lucide-react";
+import { RefreshCw, Rocket, ShieldCheck, Truck } from "lucide-react";
 
 import { Reveal } from "./motion/reveal";
 
 const props = [
-	{ icon: Truck, title: "Free shipping", description: "On orders over $50, delivered fast." },
-	{ icon: ShieldCheck, title: "2-year warranty", description: "Every product covered end to end." },
-	{ icon: RefreshCw, title: "30-day returns", description: "Changed your mind? No problem." },
-	{ icon: Rocket, title: "Launch-day service", description: "Priority support when it matters." },
+	{
+		icon: Truck,
+		title: "Free shipping",
+		description: "On orders over $50, delivered fast.",
+	},
+	{
+		icon: ShieldCheck,
+		title: "2-year warranty",
+		description: "Every product covered end to end.",
+	},
+	{
+		icon: RefreshCw,
+		title: "30-day returns",
+		description: "Changed your mind? No problem.",
+	},
+	{
+		icon: Rocket,
+		title: "Launch-day service",
+		description: "Priority support when it matters.",
+	},
 ];
 
 export function ValueProps() {
@@ -23,7 +39,7 @@ export function ValueProps() {
 							</div>
 							<div>
 								<div className="font-medium">{prop.title}</div>
-								<p className="mt-1 text-sm text-muted-foreground">
+								<p className="mt-1 text-muted-foreground text-sm">
 									{prop.description}
 								</p>
 							</div>

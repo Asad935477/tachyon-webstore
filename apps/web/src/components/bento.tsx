@@ -2,8 +2,8 @@
 
 import { buttonVariants } from "@tachyon-webstore/ui/components/button";
 import { cn } from "@tachyon-webstore/ui/lib/utils";
+import { ArrowUpRight, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Cpu, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,23 +29,23 @@ export function Bento() {
 		<section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
 			<Reveal className="mb-12 flex flex-wrap items-end justify-between gap-4">
 				<div>
-					<p className="mb-3 text-xs font-medium tracking-widest text-muted-foreground uppercase">
+					<p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-widest">
 						The Tachyon standard
 					</p>
-					<h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+					<h2 className="font-semibold text-4xl tracking-tight sm:text-5xl">
 						Less, but better.
 					</h2>
 				</div>
 				<Link
 					href="/about"
-					className="group inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+					className="group inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
 				>
 					Our philosophy
 					<ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 				</Link>
 			</Reveal>
 
-			<div className="grid gap-4 lg:grid-cols-4 lg:auto-rows-[220px]">
+			<div className="grid gap-4 lg:auto-rows-[220px] lg:grid-cols-4">
 				<Reveal className="lg:col-span-2 lg:row-span-2">
 					<motion.div
 						whileHover={reduce ? undefined : { y: -4 }}
@@ -60,10 +60,10 @@ export function Bento() {
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 						<div className="absolute inset-x-0 bottom-0 p-6">
-							<div className="text-xs font-medium tracking-widest text-white/70 uppercase">
+							<div className="font-medium text-white/70 text-xs uppercase tracking-widest">
 								Featured
 							</div>
-							<h3 className="text-2xl font-semibold text-white">Sonic Drift</h3>
+							<h3 className="font-semibold text-2xl text-white">Sonic Drift</h3>
 							<p className="mt-1 max-w-sm text-sm text-white/80">
 								Noise-cancelling headphones engineered to disappear.
 							</p>
@@ -85,8 +85,8 @@ export function Bento() {
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 						<div className="absolute inset-x-0 bottom-0 p-5">
-							<h3 className="text-lg font-semibold text-white">Meridian</h3>
-							<p className="text-xs text-white/75">Worn lightly.</p>
+							<h3 className="font-semibold text-lg text-white">Meridian</h3>
+							<p className="text-white/75 text-xs">Worn lightly.</p>
 						</div>
 					</motion.div>
 				</Reveal>
@@ -101,10 +101,10 @@ export function Bento() {
 								<stat.icon className="size-5" />
 							</div>
 							<div>
-								<div className="text-3xl font-semibold tracking-tight">
+								<div className="font-semibold text-3xl tracking-tight">
 									{stat.value}
 								</div>
-								<div className="mt-1 text-sm text-muted-foreground">
+								<div className="mt-1 text-muted-foreground text-sm">
 									{stat.label}
 								</div>
 							</div>
@@ -126,7 +126,7 @@ export function Bento() {
 						/>
 						<div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
 						<div className="absolute inset-y-0 left-0 flex max-w-xs flex-col justify-center p-6">
-							<h3 className="text-xl font-semibold text-white">
+							<h3 className="font-semibold text-white text-xl">
 								Think at the speed of light.
 							</h3>
 							<p className="mt-2 text-sm text-white/75">
@@ -140,10 +140,10 @@ export function Bento() {
 					<div className="relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border bg-gradient-to-br from-primary/15 via-background to-chart-2/15 p-6 sm:p-8">
 						<Sparkles className="size-6 text-primary" />
 						<div>
-							<h3 className="text-xl font-semibold tracking-tight">
+							<h3 className="font-semibold text-xl tracking-tight">
 								Discover the difference
 							</h3>
-							<p className="mt-2 max-w-md text-sm text-muted-foreground">
+							<p className="mt-2 max-w-md text-muted-foreground text-sm">
 								A curated catalog, refined over time. No noise, no clutter —
 								just the tools that genuinely help you do better work.
 							</p>

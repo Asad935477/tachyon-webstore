@@ -62,8 +62,10 @@ export default function SignUpForm({
 	return (
 		<div className="space-y-8">
 			<div className="space-y-2">
-				<h1 className="text-3xl font-semibold tracking-tight">Create account</h1>
-				<p className="text-sm text-muted-foreground">
+				<h1 className="font-semibold text-3xl tracking-tight">
+					Create account
+				</h1>
+				<p className="text-muted-foreground text-sm">
 					Start building a better setup with Tachyon.
 				</p>
 			</div>
@@ -93,7 +95,7 @@ export default function SignUpForm({
 								/>
 							</div>
 							{field.state.meta.errors.map((error) => (
-								<p key={error?.message} className="text-xs text-destructive">
+								<p key={error?.message} className="text-destructive text-xs">
 									{error?.message}
 								</p>
 							))}
@@ -119,7 +121,7 @@ export default function SignUpForm({
 								/>
 							</div>
 							{field.state.meta.errors.map((error) => (
-								<p key={error?.message} className="text-xs text-destructive">
+								<p key={error?.message} className="text-destructive text-xs">
 									{error?.message}
 								</p>
 							))}
@@ -142,7 +144,7 @@ export default function SignUpForm({
 								className="h-11"
 							/>
 							{field.state.meta.errors.map((error) => (
-								<p key={error?.message} className="text-xs text-destructive">
+								<p key={error?.message} className="text-destructive text-xs">
 									{error?.message}
 								</p>
 							))}
@@ -172,7 +174,9 @@ export default function SignUpForm({
 
 			<div className="flex items-center gap-3">
 				<Separator className="flex-1" />
-				<span className="text-xs text-muted-foreground">Already have an account?</span>
+				<span className="text-muted-foreground text-xs">
+					Already have an account?
+				</span>
 				<Separator className="flex-1" />
 			</div>
 

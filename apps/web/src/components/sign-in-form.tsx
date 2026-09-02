@@ -59,8 +59,8 @@ export default function SignInForm({
 	return (
 		<div className="space-y-8">
 			<div className="space-y-2">
-				<h1 className="text-3xl font-semibold tracking-tight">Welcome back</h1>
-				<p className="text-sm text-muted-foreground">
+				<h1 className="font-semibold text-3xl tracking-tight">Welcome back</h1>
+				<p className="text-muted-foreground text-sm">
 					Sign in to your Tachyon account.
 				</p>
 			</div>
@@ -91,7 +91,7 @@ export default function SignInForm({
 								/>
 							</div>
 							{field.state.meta.errors.map((error) => (
-								<p key={error?.message} className="text-xs text-destructive">
+								<p key={error?.message} className="text-destructive text-xs">
 									{error?.message}
 								</p>
 							))}
@@ -106,7 +106,7 @@ export default function SignInForm({
 								<Label htmlFor={field.name}>Password</Label>
 								<button
 									type="button"
-									className="text-xs text-muted-foreground hover:text-foreground"
+									className="text-muted-foreground text-xs hover:text-foreground"
 								>
 									Forgot password?
 								</button>
@@ -122,7 +122,7 @@ export default function SignInForm({
 								className="h-11"
 							/>
 							{field.state.meta.errors.map((error) => (
-								<p key={error?.message} className="text-xs text-destructive">
+								<p key={error?.message} className="text-destructive text-xs">
 									{error?.message}
 								</p>
 							))}
@@ -152,7 +152,7 @@ export default function SignInForm({
 
 			<div className="flex items-center gap-3">
 				<Separator className="flex-1" />
-				<span className="text-xs text-muted-foreground">New to Tachyon?</span>
+				<span className="text-muted-foreground text-xs">New to Tachyon?</span>
 				<Separator className="flex-1" />
 			</div>
 

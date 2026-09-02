@@ -11,10 +11,8 @@ import {
 
 export type CartItem = {
 	productId: string;
-	variantId?: string;
 	slug: string;
 	name: string;
-	variantName?: string;
 	price: number;
 	image?: string;
 	quantity: number;
@@ -32,8 +30,8 @@ type CartAction =
 
 const STORAGE_KEY = "tachyon:cart:v1";
 
-function itemKey(item: Pick<CartItem, "productId" | "variantId">) {
-	return `${item.productId}:${item.variantId ?? "default"}`;
+function itemKey(item: Pick<CartItem, "productId">) {
+	return item.productId;
 }
 
 function cartReducer(state: CartState, action: CartAction): CartState {

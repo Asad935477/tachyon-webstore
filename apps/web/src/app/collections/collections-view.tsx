@@ -1,9 +1,9 @@
 "use client";
 
 import { Skeleton } from "@tachyon-webstore/ui/components/skeleton";
-import { motion, useReducedMotion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ export function CollectionsView() {
 	return (
 		<div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
 			<Reveal className="mb-10">
-				<h1 className="text-4xl font-semibold tracking-tight">Collections</h1>
+				<h1 className="font-semibold text-4xl tracking-tight">Collections</h1>
 				<p className="mt-2 text-muted-foreground">
 					Curated sets for how you actually work and live.
 				</p>
@@ -55,11 +55,11 @@ export function CollectionsView() {
 										</div>
 									</div>
 									<div className="p-5">
-										<h2 className="text-lg font-medium">{collection.title}</h2>
-										<p className="mt-1 text-sm text-muted-foreground">
+										<h2 className="font-medium text-lg">{collection.title}</h2>
+										<p className="mt-1 text-muted-foreground text-sm">
 											{collection.description}
 										</p>
-										<div className="mt-2 text-xs text-muted-foreground">
+										<div className="mt-2 text-muted-foreground text-xs">
 											{collection.productIds.length} products
 										</div>
 									</div>

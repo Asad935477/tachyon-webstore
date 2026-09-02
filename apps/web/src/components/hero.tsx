@@ -2,9 +2,9 @@
 
 import { buttonVariants } from "@tachyon-webstore/ui/components/button";
 import { cn } from "@tachyon-webstore/ui/lib/utils";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -40,18 +40,22 @@ export function Hero() {
 						initial={{ opacity: 0, y: 16 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-						className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs text-muted-foreground"
+						className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-muted-foreground text-xs"
 					>
 						<span className="size-1.5 rounded-full bg-primary" />
 						New season · Premium tech
 					</motion.div>
 
-					<h1 className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+					<h1 className="font-semibold text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
 						<motion.span
 							className="block"
 							initial={{ opacity: 0, y: 24 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+							transition={{
+								duration: 0.7,
+								delay: 0.1,
+								ease: [0.22, 1, 0.36, 1],
+							}}
 						>
 							Objects for a
 						</motion.span>
@@ -59,7 +63,11 @@ export function Hero() {
 							className="block text-muted-foreground"
 							initial={{ opacity: 0, y: 24 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+							transition={{
+								duration: 0.7,
+								delay: 0.2,
+								ease: [0.22, 1, 0.36, 1],
+							}}
 						>
 							faster life.
 						</motion.span>
@@ -116,7 +124,7 @@ export function Hero() {
 								>
 									<Image
 										src={product.images[0]?.url ?? ""}
-										alt={product.images[0]?.alt ?? product.name}
+										alt={product.images[0]?.alt ?? product.title}
 										fill
 										sizes="(max-width: 1024px) 100vw, 50vw"
 										className="object-cover"
@@ -135,14 +143,16 @@ export function Hero() {
 							transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
 							className="absolute -bottom-6 -left-6 max-w-[240px] rounded-2xl border bg-background/90 p-4 shadow-lg backdrop-blur"
 						>
-							<div className="text-xs text-muted-foreground">{product.category.name}</div>
-							<div className="truncate font-medium">{product.name}</div>
+							<div className="text-muted-foreground text-xs">
+								{product.category.name}
+							</div>
+							<div className="truncate font-medium">{product.title}</div>
 							<div className="text-sm">{formatPrice(product.price)}</div>
 						</motion.div>
 					) : null}
 
 					{products.length > 1 ? (
-						<div className="absolute -right-4 top-1/2 flex -translate-y-1/2 flex-col gap-2">
+						<div className="absolute top-1/2 -right-4 flex -translate-y-1/2 flex-col gap-2">
 							{products.map((p, i) => (
 								<button
 									key={p.id}
@@ -154,7 +164,7 @@ export function Hero() {
 											? "w-6 bg-primary"
 											: "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50",
 									)}
-									aria-label={`Show ${p.name}`}
+									aria-label={`Show ${p.title}`}
 								/>
 							))}
 						</div>

@@ -13,9 +13,9 @@ export function Rating({ value, count }: { value: number; count?: number }) {
 					/>
 				))}
 			</div>
-			<span className="text-xs text-muted-foreground">{value.toFixed(1)}</span>
+			<span className="text-muted-foreground text-xs">{value.toFixed(1)}</span>
 			{count !== undefined ? (
-				<span className="text-xs text-muted-foreground/70">({count})</span>
+				<span className="text-muted-foreground/70 text-xs">({count})</span>
 			) : null}
 		</div>
 	);

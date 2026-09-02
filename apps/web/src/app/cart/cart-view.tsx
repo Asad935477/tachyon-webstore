@@ -28,7 +28,7 @@ export function CartView() {
 	return (
 		<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 			<div className="mb-8 flex items-center justify-between">
-				<h1 className="text-3xl font-semibold tracking-tight">Your cart</h1>
+				<h1 className="font-semibold text-3xl tracking-tight">Your cart</h1>
 				<Button variant="ghost" onClick={clear}>
 					Clear cart
 				</Button>
@@ -37,10 +37,7 @@ export function CartView() {
 			<div className="grid gap-8 lg:grid-cols-[1fr_320px]">
 				<div>
 					{items.map((item) => (
-						<CartItemRow
-							key={`${item.productId}:${item.variantId ?? "default"}`}
-							item={item}
-						/>
+						<CartItemRow key={item.productId} item={item} />
 					))}
 				</div>
 				<div className="space-y-4">

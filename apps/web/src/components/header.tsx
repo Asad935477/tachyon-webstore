@@ -2,7 +2,6 @@
 
 import { Badge } from "@tachyon-webstore/ui/components/badge";
 import { Button, buttonVariants } from "@tachyon-webstore/ui/components/button";
-import { cn } from "@tachyon-webstore/ui/lib/utils";
 import {
 	Sheet,
 	SheetContent,
@@ -10,14 +9,14 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@tachyon-webstore/ui/components/sheet";
+import { cn } from "@tachyon-webstore/ui/lib/utils";
 import { Menu, ShoppingBag, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useCart } from "@/lib/cart-context";
-
-import { Magnetic } from "./motion/magnetic";
 import { ModeToggle } from "./mode-toggle";
+import { Magnetic } from "./motion/magnetic";
 import UserMenu from "./user-menu";
 
 const nav = [
@@ -33,12 +32,14 @@ export default function Header() {
 	const pathname = usePathname();
 
 	return (
-		<header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
+		<header className="sticky top-0 z-50 border-border/60 border-b bg-background/75 backdrop-blur-xl">
 			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
 				<Magnetic strength={12}>
 					<Link href="/" className="group flex items-center gap-2">
 						<Sparkles className="size-4 text-primary transition-transform duration-500 group-hover:rotate-12" />
-						<span className="text-lg font-semibold tracking-tight">Tachyon</span>
+						<span className="font-semibold text-lg tracking-tight">
+							Tachyon
+						</span>
 					</Link>
 				</Magnetic>
 
@@ -67,7 +68,10 @@ export default function Header() {
 				<div className="flex items-center gap-1.5">
 					<Link
 						href="/cart"
-						className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "relative")}
+						className={cn(
+							buttonVariants({ variant: "ghost", size: "icon" }),
+							"relative",
+						)}
 					>
 						<ShoppingBag className="size-[18px]" />
 						{count > 0 ? (
@@ -83,7 +87,11 @@ export default function Header() {
 					</div>
 
 					<Sheet>
-						<SheetTrigger render={<Button variant="ghost" size="icon" className="md:hidden" />}>
+						<SheetTrigger
+							render={
+								<Button variant="ghost" size="icon" className="md:hidden" />
+							}
+						>
 							<Menu className="size-[18px]" />
 							<span className="sr-only">Menu</span>
 						</SheetTrigger>

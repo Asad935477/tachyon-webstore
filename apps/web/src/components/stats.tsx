@@ -25,17 +25,17 @@ function Counter({
 
 	return (
 		<span ref={ref}>
-			{reduce || !inView
-				? value.toFixed(decimals)
-				: (
-						<motion.span
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ duration: 0.3 }}
-						>
-							{value.toFixed(decimals)}
-						</motion.span>
-					)}
+			{reduce || !inView ? (
+				value.toFixed(decimals)
+			) : (
+				<motion.span
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.3 }}
+				>
+					{value.toFixed(decimals)}
+				</motion.span>
+			)}
 			{suffix}
 		</span>
 	);
@@ -47,14 +47,16 @@ export function Stats() {
 			<div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
 				{stats.map((stat) => (
 					<div key={stat.label} className="text-center sm:text-left">
-						<div className="text-4xl font-semibold tracking-tight">
+						<div className="font-semibold text-4xl tracking-tight">
 							<Counter
 								value={stat.value}
 								suffix={stat.suffix}
 								decimals={stat.decimals ?? 0}
 							/>
 						</div>
-						<div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+						<div className="mt-1 text-muted-foreground text-sm">
+							{stat.label}
+						</div>
 					</div>
 				))}
 			</div>

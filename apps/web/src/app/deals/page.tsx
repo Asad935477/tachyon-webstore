@@ -3,9 +3,8 @@
 import { Skeleton } from "@tachyon-webstore/ui/components/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { Tag } from "lucide-react";
-
-import { ProductGrid } from "@/components/product-grid";
 import { Reveal } from "@/components/motion/reveal";
+import { ProductGrid } from "@/components/product-grid";
 import { trpc } from "@/utils/trpc";
 
 export default function DealsPage() {
@@ -27,11 +26,11 @@ export default function DealsPage() {
 			<Reveal className="mb-10">
 				<div className="flex items-center gap-2 text-primary">
 					<Tag className="size-5" />
-					<span className="text-sm font-medium tracking-widest uppercase">
+					<span className="font-medium text-sm uppercase tracking-widest">
 						Limited time
 					</span>
 				</div>
-				<h1 className="mt-3 text-4xl font-semibold tracking-tight">Deals</h1>
+				<h1 className="mt-3 font-semibold text-4xl tracking-tight">Deals</h1>
 				<p className="mt-2 text-muted-foreground">
 					Well-made things, briefly less expensive.
 				</p>
@@ -46,7 +45,9 @@ export default function DealsPage() {
 			) : deals.length ? (
 				<ProductGrid products={deals} />
 			) : (
-				<p className="text-muted-foreground">No deals right now — check back soon.</p>
+				<p className="text-muted-foreground">
+					No deals right now — check back soon.
+				</p>
 			)}
 		</div>
 	);

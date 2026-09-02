@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
 	return (
-		<footer className="border-t border-border/60 bg-muted/30">
+		<footer className="border-border/60 border-t bg-muted/30">
 			<div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
 				<div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
 					<div className="space-y-3">
@@ -11,7 +11,7 @@ export function Footer() {
 							<Sparkles className="size-4 text-primary" />
 							<span className="font-semibold">Tachyon</span>
 						</Link>
-						<p className="max-w-xs text-sm text-muted-foreground">
+						<p className="max-w-xs text-muted-foreground text-sm">
 							Premium technology and considered design, curated for people who
 							care about the details.
 						</p>
@@ -58,15 +58,21 @@ export function Footer() {
 
 					<div className="space-y-3 text-sm">
 						<div className="font-medium">Support</div>
-						<span className="block text-muted-foreground">Shipping &amp; returns</span>
+						<span className="block text-muted-foreground">
+							Shipping &amp; returns
+						</span>
 						<span className="block text-muted-foreground">Warranty</span>
 						<span className="block text-muted-foreground">Contact</span>
 					</div>
 				</div>
 
-				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs text-muted-foreground sm:flex-row">
-					<span>© {new Date().getFullYear()} Tachyon. All rights reserved.</span>
-					<span className="tracking-widest uppercase">Crafted for the curious</span>
+				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-muted-foreground text-xs sm:flex-row">
+					<span>
+						© {new Date().getFullYear()} Tachyon. All rights reserved.
+					</span>
+					<span className="uppercase tracking-widest">
+						Crafted for the curious
+					</span>
 				</div>
 			</div>
 		</footer>

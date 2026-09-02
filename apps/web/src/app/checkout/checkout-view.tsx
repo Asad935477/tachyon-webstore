@@ -26,18 +26,15 @@ export function CheckoutView() {
 
 	return (
 		<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-			<h1 className="mb-8 text-3xl font-semibold tracking-tight">Checkout</h1>
+			<h1 className="mb-8 font-semibold text-3xl tracking-tight">Checkout</h1>
 			<div className="grid gap-8 lg:grid-cols-[1fr_360px]">
 				<div className="space-y-4">
 					<div>
 						{items.map((item) => (
-							<CartItemRow
-								key={`${item.productId}:${item.variantId ?? "default"}`}
-								item={item}
-							/>
+							<CartItemRow key={item.productId} item={item} />
 						))}
 					</div>
-					<div className="flex items-center gap-2 text-xs text-muted-foreground">
+					<div className="flex items-center gap-2 text-muted-foreground text-xs">
 						<ShieldCheck className="size-4" />
 						Payment is processed securely by Stripe.
 					</div>

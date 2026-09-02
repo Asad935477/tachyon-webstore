@@ -1,7 +1,7 @@
 "use client";
 
+import { RefreshCw, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import { motion } from "motion/react";
-import { Sparkles, ShieldCheck, Truck, RefreshCw } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,16 +33,18 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 				<div className="relative flex h-full flex-col justify-between p-10 xl:p-14">
 					<Link href="/" className="flex items-center gap-2">
 						<Sparkles className="size-5 text-primary" />
-						<span className="text-lg font-semibold tracking-tight">Tachyon</span>
+						<span className="font-semibold text-lg tracking-tight">
+							Tachyon
+						</span>
 					</Link>
 
 					<div className="space-y-6">
-						<h2 className="text-3xl font-semibold leading-tight tracking-tight xl:text-4xl">
+						<h2 className="font-semibold text-3xl leading-tight tracking-tight xl:text-4xl">
 							Objects for a
 							<br />
 							<span className="text-muted-foreground">faster life.</span>
 						</h2>
-						<p className="max-w-sm text-sm text-muted-foreground">
+						<p className="max-w-sm text-muted-foreground text-sm">
 							Join the people who choose considered technology over clutter.
 						</p>
 
@@ -50,7 +52,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 							{perks.map((perk) => (
 								<li
 									key={perk.label}
-									className="flex items-center gap-3 text-sm text-muted-foreground"
+									className="flex items-center gap-3 text-muted-foreground text-sm"
 								>
 									<span className="flex size-8 items-center justify-center rounded-full bg-background/60 backdrop-blur">
 										<perk.icon className="size-4 text-primary" />
@@ -61,7 +63,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 						</ul>
 					</div>
 
-					<p className="text-xs text-muted-foreground">
+					<p className="text-muted-foreground text-xs">
 						© {new Date().getFullYear()} Tachyon. All rights reserved.
 					</p>
 				</div>
@@ -76,7 +78,9 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 				>
 					<div className="mb-8 flex items-center gap-2 lg:hidden">
 						<Sparkles className="size-5 text-primary" />
-						<span className="text-lg font-semibold tracking-tight">Tachyon</span>
+						<span className="font-semibold text-lg tracking-tight">
+							Tachyon
+						</span>
 					</div>
 					{children}
 				</motion.div>

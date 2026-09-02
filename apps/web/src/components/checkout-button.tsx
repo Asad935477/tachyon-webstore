@@ -32,7 +32,6 @@ export function CheckoutButton() {
 				checkout.mutate({
 					items: items.map((item) => ({
 						productId: item.productId,
-						variantId: item.variantId,
 						quantity: item.quantity,
 					})),
 				})

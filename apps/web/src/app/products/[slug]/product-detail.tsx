@@ -10,37 +10,27 @@ import { toast } from "sonner";
 
 import { Price } from "@/components/price";
 import { ProductGallery } from "@/components/product-gallery";
-import { VariantSelector } from "@/components/variant-selector";
 import { useCart } from "@/lib/cart-context";
 import type { ProductSummary } from "@/lib/catalog";
 
 export function ProductDetail({ product }: { product: ProductSummary }) {
 	const router = useRouter();
 	const { addItem } = useCart();
-	const defaultVariant =
-		product.variants.find((v) => v.isDefault) ?? product.variants[0];
-	const [variantId, setVariantId] = useState<string | undefined>(
-		defaultVariant?.id,
-	);
 	const [quantity, setQuantity] = useState(1);
 
-	const variant =
-		product.variants.find((v) => v.id === variantId) ?? defaultVariant;
-	const price = variant?.price ?? product.price;
-	const outOfStock = variant ? variant.stock <= 0 : false;
+	const outOfStock = product.stock <= 0;
+	const lowStock = !outOfStock && product.stock <= 5;
 
 	function handleAdd() {
-		if (!variant) {
-			toast.error("This product has no available options.");
+		if (outOfStock) {
+			toast.error("This product is out of stock.");
 			return;
 		}
 		addItem({
 			productId: product.id,
-			variantId: variant.id,
 			slug: product.slug,
-			name: product.name,
-			variantName: product.variants.length > 1 ? variant.name : undefined,
-			price,
+			name: product.title,
+			price: product.price,
 			image: product.images[0]?.url,
 			quantity,
 		});
@@ -57,10 +47,10 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 							{product.category.name}
 						</div>
 						<h1 className="font-semibold text-3xl tracking-tight">
-							{product.name}
+							{product.title}
 						</h1>
 						<Price
-							cents={price}
+							cents={product.price}
 							compareAtCents={product.compareAtPrice}
 							currency={product.currency}
 							className="text-xl"
@@ -71,19 +61,21 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 						{product.description}
 					</p>
 
-					{product.variants.length > 0 ? (
-						<div className="space-y-2">
-							<div className="font-medium text-muted-foreground text-xs">
-								{product.variants.length > 1
-									? "Choose an option"
-									: "Configuration"}
-							</div>
-							<VariantSelector
-								variants={product.variants}
-								selected={variantId}
-								onSelect={setVariantId}
-							/>
-						</div>
+					{product.highlights.length > 0 ? (
+						<ul className="grid gap-1.5 text-muted-foreground text-sm sm:grid-cols-2">
+							{product.highlights.map((highlight) => (
+								<li key={highlight} className="flex items-center gap-2">
+									<span className="size-1 rounded-full bg-primary" />
+									{highlight}
+								</li>
+							))}
+						</ul>
+					) : null}
+
+					{lowStock ? (
+						<Badge variant="secondary" className="self-center">
+							Only {product.stock} left in stock
+						</Badge>
 					) : null}
 
 					<Separator />
@@ -121,11 +113,6 @@ export function ProductDetail({ product }: { product: ProductSummary }) {
 						<Button variant="outline" onClick={() => router.back()}>
 							Back
 						</Button>
-						{product.variants.length > 1 && variant ? (
-							<Badge variant="secondary" className="self-center">
-								SKU {variant.sku}
-							</Badge>
-						) : null}
 					</div>
 				</div>
 			</div>

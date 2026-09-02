@@ -6,8 +6,8 @@ import { PackageSearch } from "lucide-react";
 import { useParams } from "next/navigation";
 
 import { EmptyState } from "@/components/empty-state";
-import { ProductGrid } from "@/components/product-grid";
 import { Reveal } from "@/components/motion/reveal";
+import { ProductGrid } from "@/components/product-grid";
 import { trpc } from "@/utils/trpc";
 
 export default function CollectionPage() {
@@ -48,7 +48,7 @@ export default function CollectionPage() {
 	return (
 		<div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
 			<Reveal className="mb-10">
-				<h1 className="text-4xl font-semibold tracking-tight">{data.title}</h1>
+				<h1 className="font-semibold text-4xl tracking-tight">{data.title}</h1>
 				<p className="mt-2 text-muted-foreground">{data.description}</p>
 			</Reveal>
 

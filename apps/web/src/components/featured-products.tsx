@@ -20,7 +20,7 @@ export function FeaturedProducts() {
 		<section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
 			<Reveal className="mb-10 flex items-end justify-between">
 				<div>
-					<h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+					<h2 className="font-semibold text-3xl tracking-tight sm:text-4xl">
 						Featured this season
 					</h2>
 					<p className="mt-2 text-muted-foreground">
@@ -29,7 +29,10 @@ export function FeaturedProducts() {
 				</div>
 				<Link
 					href="/products"
-					className={cn(buttonVariants({ variant: "outline" }), "group hidden sm:inline-flex")}
+					className={cn(
+						buttonVariants({ variant: "outline" }),
+						"group hidden sm:inline-flex",
+					)}
 				>
 					View all
 					<ArrowRight className="transition-transform group-hover:translate-x-0.5" />

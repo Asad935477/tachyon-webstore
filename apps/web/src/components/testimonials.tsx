@@ -17,7 +17,7 @@ export function Testimonials() {
 	return (
 		<section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
 			<Reveal className="mb-10 text-center">
-				<h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+				<h2 className="font-semibold text-3xl tracking-tight sm:text-4xl">
 					Loved by the curious.
 				</h2>
 				<p className="mt-2 text-muted-foreground">
@@ -37,12 +37,12 @@ export function Testimonials() {
 									/>
 								))}
 							</div>
-							<blockquote className="flex-1 text-sm text-foreground/90">
+							<blockquote className="flex-1 text-foreground/90 text-sm">
 								“{t.quote}”
 							</blockquote>
 							<figcaption>
 								<div className="font-medium">{t.name}</div>
-								<div className="text-xs text-muted-foreground">{t.role}</div>
+								<div className="text-muted-foreground text-xs">{t.role}</div>
 							</figcaption>
 						</figure>
 					</Reveal>

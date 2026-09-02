@@ -1,7 +1,7 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ export function CategoryTiles() {
 			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
 				<Reveal className="mb-10 flex items-end justify-between">
 					<div>
-						<h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+						<h2 className="font-semibold text-3xl tracking-tight sm:text-4xl">
 							Shop by category
 						</h2>
 						<p className="mt-2 text-muted-foreground">
@@ -58,7 +58,7 @@ export function CategoryTiles() {
 									</div>
 									<div className="p-3">
 										<div className="font-medium">{category.name}</div>
-										<div className="text-xs text-muted-foreground">
+										<div className="text-muted-foreground text-xs">
 											{category._count.products} products
 										</div>
 									</div>

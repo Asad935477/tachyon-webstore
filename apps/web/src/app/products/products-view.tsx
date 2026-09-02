@@ -16,7 +16,11 @@ import { SortSelect } from "@/components/sort-select";
 import type { ProductSort } from "@/lib/catalog";
 import { trpc } from "@/utils/trpc";
 
-export function ProductsView({ initialCategory }: { initialCategory?: string }) {
+export function ProductsView({
+	initialCategory,
+}: {
+	initialCategory?: string;
+}) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -58,9 +62,10 @@ export function ProductsView({ initialCategory }: { initialCategory?: string }) 
 		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 			<Reveal className="mb-10 space-y-5">
 				<div>
-					<h1 className="text-4xl font-semibold tracking-tight">
+					<h1 className="font-semibold text-4xl tracking-tight">
 						{category
-							? categories.data?.find((c) => c.slug === category)?.name ?? "Shop"
+							? (categories.data?.find((c) => c.slug === category)?.name ??
+								"Shop")
 							: "Shop all"}
 					</h1>
 					<p className="mt-2 text-muted-foreground">
@@ -139,7 +144,7 @@ export function ProductsView({ initialCategory }: { initialCategory?: string }) 
 								>
 									<ChevronLeft />
 								</Button>
-								<span className="px-3 text-sm text-muted-foreground">
+								<span className="px-3 text-muted-foreground text-sm">
 									Page {page} of {products.data.pageCount}
 								</span>
 								<Button
