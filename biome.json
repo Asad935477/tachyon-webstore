@@ -26,7 +26,8 @@
 			"!**/.svelte-kit",
 			"!**/wrangler.jsonc",
 			"!**/.source",
-			"!**/convex/_generated"
+			"!**/convex/_generated",
+			"!**/prisma/generated"
 		]
 	},
 	"formatter": {
@@ -69,6 +70,21 @@
 			"quoteStyle": "double"
 		}
 	},
+	"overrides": [
+		{
+			"includes": ["packages/ui/src/components/**"],
+			"linter": {
+				"rules": {
+					"a11y": {
+						"noLabelWithoutControl": "off",
+						"noStaticElementInteractions": "off",
+						"useKeyWithClickEvents": "off",
+						"useSemanticElements": "off"
+					}
+				}
+			}
+		}
+	],
 	"css": {
 		"parser": {
 			"tailwindDirectives": true
