@@ -1,5 +1,28 @@
 @import "@tachyon-webstore/ui/globals.css";
 
+/* Painted before React mounts, off the attribute set by the pre-paint script
+   in layout.tsx. Holds a plain void over the server-rendered storefront so the
+   curtain has something to appear on top of, without a flash of content. */
+html[data-intro="pending"]::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 9998;
+	background: var(--background);
+	pointer-events: none;
+}
+
+/* Skeleton sheen. The old animate-pulse on a 3%-off-background --muted was
+   effectively invisible; --muted is now +9% and this gives it direction. */
+@keyframes skeleton-sheen {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}
+
 .intro {
 	position: fixed;
 	inset: 0;
@@ -38,8 +61,8 @@
 	left: -15%;
 	width: 60vmax;
 	height: 60vmax;
-	background: color-mix(in oklab, var(--primary) 40%, transparent);
-	opacity: 0.5;
+	background: color-mix(in oklab, var(--primary) 16%, transparent);
+	opacity: 0.55;
 	animation: intro-drift-a 7s ease-in-out infinite alternate;
 }
 
@@ -48,8 +71,8 @@
 	bottom: -24%;
 	width: 55vmax;
 	height: 55vmax;
-	background: color-mix(in oklab, var(--chart-2) 35%, transparent);
-	opacity: 0.45;
+	background: color-mix(in oklab, var(--chart-2) 26%, transparent);
+	opacity: 0.42;
 	animation: intro-drift-b 8.5s ease-in-out infinite alternate;
 }
 
@@ -58,8 +81,8 @@
 	left: 52%;
 	width: 45vmax;
 	height: 45vmax;
-	background: color-mix(in oklab, var(--chart-1) 30%, transparent);
-	opacity: 0.4;
+	background: color-mix(in oklab, var(--chart-1) 14%, transparent);
+	opacity: 0.34;
 	animation: intro-drift-c 10s ease-in-out infinite alternate;
 }
 

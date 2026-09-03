@@ -24,13 +24,32 @@ export const metadata: Metadata = {
 		"Curated headphones, wearables, computing, and smart-home essentials.",
 };
 
+/**
+ * Runs before first paint, so the curtain decision is made without a flash in
+ * either direction: returning visitors never glimpse the splash, and first-time
+ * visitors never glimpse the storefront underneath it.
+ *
+ * Sets `data-intro="pending"` on <html>; `index.css` paints a plain void cover
+ * off that attribute until <AppShell> mounts the animated loader over it.
+ * Reduced-motion skips the curtain entirely — the CSS used to freeze the
+ * animation but leave the full duration running, which was the worse outcome.
+ */
+const introGate = `(function(){try{
+  var seen = localStorage.getItem("tachyon:intro:seen");
+  var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!seen && !still) document.documentElement.dataset.intro = "pending";
+}catch(e){}})();`;
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" className="dark" suppressHydrationWarning>
+			<head>
+				<script dangerouslySetInnerHTML={{ __html: introGate }} />
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden antialiased`}
 			>

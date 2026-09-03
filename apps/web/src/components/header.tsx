@@ -15,7 +15,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useCart } from "@/lib/cart-context";
-import { ModeToggle } from "./mode-toggle";
 import { Magnetic } from "./motion/magnetic";
 import UserMenu from "./user-menu";
 
@@ -81,7 +80,6 @@ export default function Header() {
 						) : null}
 						<span className="sr-only">Cart</span>
 					</Link>
-					<ModeToggle />
 					<div className="hidden md:block">
 						<UserMenu />
 					</div>

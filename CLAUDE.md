@@ -51,7 +51,7 @@ and name it, it doesn't belong.
 Sequential — each depends on the one before, each ships on its own. Mark done here and
 commit as `feat(ui): phase N — <name>`.
 
-- [ ] **1 — Foundation & splash repair** (~3.5h) — tokens, `--font-sans` → Geist, `--muted` +9%, one radius scale, and the six splash implementation bugs. Nothing redesigned.
+- [x] **1 — Foundation & splash repair** ✅ `b823cd5`..HEAD — tokens, `--font-sans` → Geist, `--muted` +9%, one radius scale, and the six splash implementation bugs. Nothing redesigned.
 - [ ] **2 — Ambient light field** (~4h) — the fullscreen fragment shader, raw WebGL, mounted once in the root layout.
 - [ ] **3 — Hero** (~4h) — 2.5D product plane, fix clipped slide dots + dead vertical space.
 - [ ] **4 — Product card & grid** (~6h) — rebuild on the `/categories` card pattern, then the shared scroll-synced hover canvas.

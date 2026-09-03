@@ -9,12 +9,16 @@ import { queryClient } from "@/utils/trpc";
 
 import { ThemeProvider } from "./theme-provider";
 
+/**
+ * Void & Light is dark-committed — see CLAUDE.md. ThemeProvider stays so the
+ * `dark:` variants baked into the primitives keep resolving, but the theme is
+ * forced; there is no light palette to switch to.
+ */
 export default function Providers({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeProvider
 			attribute="class"
-			defaultTheme="system"
-			enableSystem
+			forcedTheme="dark"
 			disableTransitionOnChange
 		>
 			<QueryClientProvider client={queryClient}>
